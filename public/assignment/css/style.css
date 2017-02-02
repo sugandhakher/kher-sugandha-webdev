@@ -3,5 +3,53 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 60px;
+    padding-bottom: 55px;
 }
+
+.no-left-padding{
+    padding-left: 0px;
+}
+
+.no-left-margin{
+    margin-left: 0px;
+}
+
+/*.navbar-header{*/
+    /*background-color: black;*/
+/*}*/
+
+/*.navbar-default.navbar*/
+
+/*.navbar-default {*/
+    /*background-color: #337ab7;*/
+    /*border-color: #337ab7;*/
+/*}*/
+
+/*.navbar-default .navbar-brand {*/
+    /*color: #fcf8e3;*/
+/*}*/
+
+/*a {*/
+    /*color: #fcf8e3;*/
+    /*text-decoration: none;*/
+/*}*/
+
+.navbar-brand.whiteColor{
+    color: white;
+}
+.whiteColor{
+    color: white;
+}
+
+.blackColor{
+    color: black;
+}
+
+
+.blueColor{
+    background-color:#337ab7;
+}
+
+
+
