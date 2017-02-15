@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="WebAppmaker">
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!--Stylesheets-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
+
+    <!--loading angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <script src="views/user/controller/login.controller.client.js"></script>
-    <script src="views/user/controller/profile.controller.client.js"></script>
-    <script src="views/Website/website-list.controller.client.js"></script>
+
+    <!--user controllers-->
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+
+    <!--page controllers-->
+    <script src="views/page/controllers/page-edit.controller.client.js"></script>
+    <script src="views/page/controllers/page-list.controller.client.js"></script>
+    <script src="views/page/controllers/page-new.controller.client.js"></script>
+
+    <!--website controllers-->
+    <script src="views/website/controllers/website-list.controller.client.js"></script>
+    <script src="views/website/controllers/website-edit.controller.client.js"></script>
+    <script src="views/website/controllers/website-new.controller.client.js"></script>
+
+    <!--widget controllers-->
+    <script src="views/widget/controllers/widget-list.controller.client.js"></script>
+
+    <!--services-->
     <script src="services/user.service.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="services/website.service.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+
+
+
+
     <meta charset="UTF-8">
     <title>Assignment Home Page</title>
 </head>
 <body>
 <div ng-view></div>
-    <!--<h1>Assignment Home Page</h1>-->
 </body>
 </html>
