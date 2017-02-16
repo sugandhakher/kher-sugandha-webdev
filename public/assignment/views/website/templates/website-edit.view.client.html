@@ -27,7 +27,7 @@
         <div class="v-line hidden-xs"></div>
         <div class="col-sm-8">
             <div class="navbar-text pull-right">
-                <a href="website-list.view.client.html">
+                <a href="#/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-ok whiteColor">
 
                     </span>
@@ -42,48 +42,19 @@
     </div>
 </nav>
 <div class="row container-fluid">
-    <div class="col-sm-4 hidden-xs">
+    <div class="col-sm-4 hidden-xs scroll">
         <div ng-if="model.error" class="alert alert-danger" role="alert">
             {{model.error}}
         </div>
-        <ul class="list-inline">
-            <a class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-
-            <a>
-                Blogging App
-            </a>
-        </ul>
-
-        <ul class="list-inline">
-            <a class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-
-            <a>
-                Address Book App
-            </a>
-        </ul>
-
-        <ul class="list-inline">
-            <a class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-
-            <a>
-                Script Testing App
-            </a>
-        </ul>
-
-        <ul class="list-inline">
-            <a class="pull-right">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-
-            <a>
-                Blogger
-            </a>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat = "website in model.websites">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                    {{website.name}}
+                </a>
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -105,10 +76,7 @@
                           rows="5"></textarea>
             </div>
 
-            <a class="btn btn-danger btn-block"
-               ng-click="model.deleteWebsite()">
-                Delete
-            </a>
+
         </form>
 
         <a class="btn btn-danger  btn-block"
