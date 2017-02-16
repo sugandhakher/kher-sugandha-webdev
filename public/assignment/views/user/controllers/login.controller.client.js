@@ -1,22 +1,18 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .controller("loginController", loginController);
+        .controller("LoginController",LoginController);
 
-    function loginController(UserService, $location){
+    function LoginController($location, UserService){
         var vm = this;
-        vm.login = login;
+        vm.login = function(username,password){
 
-        function login(user){
-            var loginUser = UserService.findUserByCredentials(user.username, user.password);
-            if(loginUser != null) {
-                $location.url('/profile/' + loginUser._id);
-            }   else{
-                    vm.error = 'user not found';
+            var user = UserService.findUserByCredentials(username,password);
+            if(user){
+                $location.url("/user/"+user._id);
+            }else{
+                vm.error = "Check username and password"
             }
-
         }
-
-
     }
 })();

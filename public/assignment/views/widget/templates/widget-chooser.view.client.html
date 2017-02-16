@@ -1,27 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Widget Chooser</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
 
     <div class="container">
 
         <div class="navbar-text pull-left">
-            <a href="widget-list.view.client.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                     <span class="glyphicon glyphicon-chevron-left whiteColor">
 
                     </span>
             </a>
         </div>
         <div class="navbar-header">
-            <a href="widget-heading.view.client.html" class="navbar-brand whiteColor">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}"
+               class="navbar-brand whiteColor">
                 Choose Widget
             </a>
 
@@ -32,98 +22,77 @@
 </nav>
 
 <div class="container">
-    <div class="container">
-        <!--<h1>Profile</h1>-->
-
-        <ul class="list-inline">
-            <a>
+    <ul class="list-group">
+        <li class="list-group-item borderless">
+            <a ng-click="model.createWidget('HEADER')">
                 Header
             </a>
-        </ul>
-
-        <ul class="list-inline">
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Label
             </a>
-        </ul>
-
-        <ul class="list-inline">
-
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 HTML
             </a>
-
-        </ul>
-
-        <ul class="list-inline">
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Text Input
             </a>
-
-
-        </ul>
-
-        <ul class="list-inline">
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Link
             </a>
-
-
-        </ul>
-
-        <ul class="list-inline">
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Button
             </a>
-
-
-        </ul>
-
-        <ul class="list-inline">
-            <a href="widget-image.view.client.html">
+        </li>
+        <li class="list-group-item borderless">
+            <a ng-click="model.createWidget('IMAGE')">
                 Image
             </a>
-
-
-        </ul>
-        <ul class="list-inline">
-           <a href="widget-youtube.view.client.html">
+        </li>
+        <li class="list-group-item borderless">
+            <a ng-click="model.createWidget('YOUTUBE')">
                 YouTube
             </a>
-
-
-        </ul>
-        <ul class="list-inline">
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Data Table
             </a>
-
-
-        </ul>
-        <ul class="list-inline">
-
-
-            <a>
+        </li>
+        <li class="list-group-item borderless">
+            <a href="">
                 Repeater
             </a>
-
-
-        </ul>
-    </div>
-
+        </li>
+    </ul>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom blueColor">
+<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-
-        <div class="navbar-text pull-right">
-            <a>
-                <span class="glyphicon glyphicon-user whiteColor"></span>
-            </a>
+        <div ng-if="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
         </div>
-
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+            </div>
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
     </div>
 </nav>
-
-</body>
-</html>

@@ -1,55 +1,72 @@
-(function () {
+(function(){
     angular
         .module("WebAppMaker")
-        .factory("WebsiteService", WebsiteService);
+        .factory("WebsiteService",WebsiteService);
 
-    function WebsiteService() {
-        var websites = [
-            { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem", created: new Date() },
-            { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem", created: new Date() },
-            { "_id": "456", "name": "Gizmodo",     "developerId": "456", "description": "Lorem", created: new Date() },
-            { "_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem", created: new Date() },
-            { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem", created: new Date() },
-            { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem", created: new Date() }
-        ];
+    var websites = [
+        { "_id": "123", "name": "Facebook",    "developerId": "456" },
+        { "_id": "234", "name": "Tweeter",     "developerId": "456" },
+        { "_id": "456", "name": "Gizmodo",     "developerId": "456" },
+        { "_id": "567", "name": "Tic Tac Toe", "developerId": "123" },
+        { "_id": "678", "name": "Checkers",    "developerId": "123" },
+        { "_id": "789", "name": "Chess",       "developerId": "234" }
+    ];
+
+    function WebsiteService(){
         var api = {
-            "createWebsite": createWebsite,
-            "findWebsiteById": findWebsiteById,
-            "deleteWebsite": deleteWebsite,
-            "findAllWebsitesForUser": findAllWebsitesForUser
+            createWebsite : createWebsite,
+            findWebsitesByUser : findWebsitesByUser,
+            findWebsiteById : findWebsiteById,
+            updateWebsite : updateWebsite,
+            deleteWebsite : deleteWebsite
         };
+
         return api;
 
-        function findWebsiteById(wid) {
-            for(var w in websites) {
-                if(websites[w]._id === wid) {
-                    return angular.copy(websites[w]);
+        function createWebsite(userId, website){
+            website.developerId = userId;
+            websites.push(website)
+            return website;
+        }
+
+        function findWebsitesByUser(userId){
+            var websitesForUser=[];
+            for(var i in websites){
+                if(websites[i].developerId === userId){
+                    websitesForUser.push(websites[i]);
+                }
+            }
+            return websitesForUser;
+        }
+
+        function findWebsiteById(websiteId){
+            for(var i in websites){
+                if(websites[i]._id === websiteId){
+                    return websites[i];
                 }
             }
             return null;
         }
-        function deleteWebsite(websiteId) {
-            for(var w in websites) {
-                if(websites[w]._id === websiteId) {
-                    websites.splice(w, 1);
+
+        function updateWebsite(websiteId, website){
+            for(var i in websites){
+                if(websites[i]._id === websiteId){
+                    websites[i].name = website.name;
+                    return true;
                 }
             }
+            return false;
         }
 
-        function createWebsite(userId, website) {
-            website.developerId = userId;
-            website._id = (new Date()).getTime();
-            websites.push(website);
-        }
-
-        function findAllWebsitesForUser(userId) {
-            var sites = [];
-            for(var w in websites) {
-                if(websites[w].developerId === userId) {
-                    sites.push(websites[w]);
+        function deleteWebsite(websiteId){
+            for(var i in websites){
+                if(websites[i]._id === websiteId){
+                    websites.splice(i,1);
+                    return true;
                 }
             }
-            return sites;
+            return false;
+
         }
     }
 })();

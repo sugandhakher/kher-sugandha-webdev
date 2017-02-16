@@ -1,25 +1,34 @@
-(function(){
+
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("profileController", profileController);
+        .controller("ProfileController", ProfileController);
 
-    function profileController($routeParams, UserService){
+    function ProfileController($routeParams,UserService,$location) {
         var vm = this;
-        var userId = $routeParams.uid;
+        vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
 
-        vm.update = function (newUser) {
-            var user = UserService.updateUser(userId, newUser);
-            if(user == null) {
-                vm.error = "unable to update user";
-            } else {
-                vm.message = "user details successfully updated"
+        vm.id = $routeParams.userId;
+
+        function init(){
+            vm.user = UserService.findUserById(vm.id);
+        }
+
+        init();
+
+        function updateUser(newUser){
+            UserService.updateUser(vm.id,newUser);
+        }
+
+        function deleteUser(){
+            var result = UserService.deleteUser(vm.id);
+            if(result){
+                $location.url("/login");
+            }else{
+                vm.error = "User cannot be deleted";
             }
-        };
+        }
 
-        var user = UserService.findUserById(userId);
-        vm.user = user;
-
-
-        console.log(user);
     }
 })();

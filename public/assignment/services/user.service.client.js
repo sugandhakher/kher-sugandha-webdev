@@ -1,67 +1,81 @@
+
 (function(){
     angular
         .module("WebAppMaker")
-        .factory('UserService', userService);
+        .factory("UserService", UserService);
 
-    function userService(){
-        var users = [
+    var users = [
+        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+        {_id: "345", username: "billy",   password: "billy",   firstName: "Billy", lastName: "Joe"  },
+        {_id: "456", username: "sugandha", password: "sugandha", firstName: "Sugandha",   lastName: "Kher" }
+    ];
 
-            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-        ];
+    function UserService(){
+        var api={
+            createUser : createUser,
+            findUserById : findUserById,
+            findUserByUsername : findUserByUsername,
+            findUserByCredentials : findUserByCredentials,
+            updateUser : updateUser,
+            deleteUser : deleteUser
+        }
 
-        var api = {
-            "findUserByCredentials": findUserByCredentials,
-            "findUserById": findUserById,
-            "createUser": createUser,
-            "updateUser": updateUser,
-            "deleteUser": deleteUser
-        };
         return api;
 
-        function createUser(user) {
-            var new_user={};
-            new_user.username = user.username;
-            new_user.email = user.email;
-            new_user.firstName = user.firstname;
-            new_user.lastName = user.lastname;
-            return null;
-        }
+        function createUser(user){
+            users.push(user);
+            return user;
 
-        function updateUser(userId, newUser) {
-            for(var u in users) {
-                var user = users[u];
-                if( user._id === userId ) {
-                    users[u].firstName = newUser.firstName;
-                    users[u].lastName = newUser.lastName;
-                    return user;
+        }
+        function findUserById(userId){
+            for(var i in users){
+                if(users[i]._id === userId){
+                    return users[i];
                 }
             }
             return null;
         }
 
-        function findUserById(uid){
-            for(var u in users){
-                var user = users[u];
-                if (user._id === uid ){
-                    return angular.copy(user);
+        function findUserByUsername(username){
+            for(var i in users){
+                if(users[i].username === username){
+                    return users[i];
                 }
             }
             return null;
         }
 
-        function findUserByCredentials(username, password){
-            for (var u in users){
-                var user = users[u];
-                if(user.username === username &&
-                    user.password === password){
-                    return angular.copy(user);
+        function findUserByCredentials(username,password){
+            for(var i in users){
+                if(users[i].username === username && users[i].password === password){
+                    return users[i];
                 }
             }
             return null;
         }
+
+        function updateUser(userId, newUser){
+            for(var i in users){
+                if(users[i]._id === userId){
+                    users[i].firstName = newUser.firstName;
+                    users[i].lastName = newUser.lastName;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function deleteUser(userId){
+            for(var i in users){
+                if(users[i]._id === userId){
+                    users.splice(i,1);
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
-})();
 
+})();

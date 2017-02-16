@@ -1,20 +1,16 @@
+
 (function(){
     angular
         .module("WebAppMaker")
-        .controller("WebsiteListController", WebsiteListController);
+        .controller("WebsiteListController",WebsiteListController);
 
-
-    function WebsiteListController($routeparams){
-
+    function WebsiteListController($routeParams, WebsiteService){
         var vm = this;
+        vm.userId = $routeParams.userId;
 
-        var userId = $routeParams.uid;
-        vm.websites = WebService.findWebsitesForUser(userId);
-
-        var websites = [
-            {"_id": "123", "name": "Facebook", "description": "Most popular"},
-            {"_id": "234", "name": "Wikipedia", "description": "Worlds encyclopedia"}
-        ];
-
-   }
+        function init(){
+            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+        }
+        init();
+    }
 })();

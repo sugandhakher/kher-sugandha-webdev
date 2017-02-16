@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Widget List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
 
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="../../page/templates/page-list.view.client.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
                 <span class="glyphicon glyphicon-chevron-left whiteColor"></span>
             </a>
         </p>
@@ -19,7 +10,7 @@
             Widgets
         </a>
         <div class="navbar-text pull-right">
-            <a href="widget-choose.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
           <span  class="glyphicon glyphicon-plus whiteColor">
           </span>
             </a>
@@ -28,82 +19,37 @@
 </nav>
 
 
-<div class="container">
-
-
-    <form>
-        <ul class="list-inline">
-
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-align-justify whiteColor"></span>
+<div class="container-fluid">
+    <div ng-repeat="widget in model.widgets" class="widget-outer">
+        <div class="widget-properties">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"> </span>
             </a>
-            <a href="widget-heading.view.client.html" class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
-            </a>
-
-            <h1>
-            <a class="blackColor">
-                Movies2014
-            </a>
-            </h1>
-        </ul>
-
-        <ul class="list-inline">
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-align-justify blackColor"></span>
-            </a>
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
-            </a>
-
-            <h3>
-            <a class="blackColor">
-                Interstellar is a 2014 epic science fiction film co-written, co-produced, and directed by Christopher Nolan.
-            </a>
-            </h3>
-        </ul>
-
-        <ul class="list-inline">
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-align-justify blackColor"></span>
-            </a>
-            <a href="widget-image.view.client.html" class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
-            </a>
-            <h2>Spectacular Mountain</h2>
-            <img src="../pic_mountain.jpg" alt="Mountain View" style="width:304px;height:228px;">
-        </ul>
-
-        <ul class="list-inline">
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-align-justify blackColor"></span>
-            </a>
-            <a href="widget-youtube.view.client.html" class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
-            </a>
-            <iframe title="YouTube video player" class="youtube-player" type="text/html"
-                    width="640" height="390" src="//www.youtube.com/embed/ePbKGoIGAXY"
-                    frameborder="0" allowFullScreen></iframe>
-        </ul>
-
-        <ul class="list-inline">
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-align-justify blackColor"></span>
-            </a>
-            <a class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
-            </a>
-
-            <h3>
-                <a class="blackColor">
-                    Interstellar premiered on October 26, 2014 in Los Angeles. In the United States, it was released on film stock, expanding to venues using digital projectors. The film was successful at the box office with a worldwide gross of over $675 million and received positive reviews from critics, who gave particular praise to the film's science fiction themes, Hans Zimmer's musical score, the visual effects, and the performances of McConaughey, Hathaway,</a>
-            </h3>
-        </ul>
-
-
-    </form>
-
-
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER" ng-switch="widget.size">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
+            </div>
+            <div ng-switch-when="HTML">
+                <div ng-bind-html="model.getSafeHtml(widget)"></div>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <iframe width="{{widget.width}}" ng-src="{{model.getSafeUrl(widget)}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div ng-switch-default>
+                Unable to render widget
+            </div>
+        </div>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom blueColor">
@@ -122,7 +68,7 @@
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a href="../../user/templates/profile.view.client.html">
+            <a href="#/user/{{model.userId}}">
           <span class="glyphicon glyphicon-user whiteColor">
           </span>
             </a>

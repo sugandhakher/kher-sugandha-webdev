@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../../css/style.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Website Edit</title>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
-                <a href="website-list.view.client.html">
+                <a href="#/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-chevron-left whiteColor">
 
                     </span>
@@ -22,15 +13,9 @@
                     Websites
                 </a>
             </div>
-            <!--<div class="navbar-text pull-right">-->
-            <!--<a>-->
-            <!--<span class="glyphicon glyphicon-chevron-left">-->
 
-            <!--</span>-->
-            <!--</a>-->
-            <!--</div>-->
             <div class="navbar-text pull-right">
-                <a>
+                <a ng-click="model.updateWebsite(model.website)">
                     <span class="glyphicon glyphicon-plus whiteColor">
 
                     </span>
@@ -58,68 +43,76 @@
 </nav>
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs">
+        <div ng-if="model.error" class="alert alert-danger" role="alert">
+            {{model.error}}
+        </div>
         <ul class="list-inline">
-            <a  class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
+            <a class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
             </a>
 
-            <a >
+            <a>
                 Blogging App
             </a>
         </ul>
 
         <ul class="list-inline">
-            <a  class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
+            <a class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
             </a>
 
-            <a >
+            <a>
                 Address Book App
             </a>
         </ul>
 
         <ul class="list-inline">
-            <a  class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
+            <a class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
             </a>
 
-            <a >
+            <a>
                 Script Testing App
             </a>
         </ul>
 
         <ul class="list-inline">
-            <a  class = "pull-right">
-                <span class = "glyphicon glyphicon-cog"></span>
+            <a class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
             </a>
 
-            <a >
+            <a>
                 Blogger
             </a>
         </ul>
-
-
-
-     </div>
-
-
-
-
-
+    </div>
 
     <div class="col-sm-8">
         <form>
             <div class="form-group">
-                <label for="name">Website Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <label for="websiteName">Website Name</label>
+                <input type="text"
+                       ng-model="model.website.name"
+                       class="form-control"
+                       id="websiteName"
+                       placeholder="SiteFly">
             </div>
             <div class="form-group">
-                <label for="description">Website Description</label>
-                <input type="textarea" class="form-control" id="description" placeholder="Description">
+                <label for="websiteDescription">Website Description</label>
+                <textarea class="form-control"
+                          placeholder="Create a free website in seconds using your Facebook business page."
+                          id="websiteDescription"
+                          rows="5"></textarea>
             </div>
+
+            <a class="btn btn-danger btn-block"
+               ng-click="model.deleteWebsite()">
+                Delete
+            </a>
         </form>
+
         <a class="btn btn-danger  btn-block"
-           href="website-list.view.client.html">Delete</a>
+           href="#/user/{{model.userId}}/website">Delete</a>
     </div>
 </div>
 
@@ -128,7 +121,7 @@
     <div class="container-fluid">
 
         <div class="navbar-text pull-right">
-            <a href="../../../User/templates/profile.view.client.html">
+            <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user whiteColor"></span>
             </a>
         </div>

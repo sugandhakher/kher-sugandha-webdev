@@ -1,123 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Page Edit</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
     <div class="container-fluid>
-        <div class="row">
-            <div class="col-sm-4 container-fluid hidden-xs ">
-                <p class ="navbar-text pull-left">
-                    <a href="page-list.view.client.html">
-                        <span class = "glyphicon glyphicon-chevron-left whiteColor"></span>
-                    </a>
-                </p>
-                <a class="navbar-brand whiteColor" id= "Profile "href="#">
-                    Pages
-                </a>
-                <p class="navbar-text pull-right">
-                    <a class="navbar-link ">
-                        <span class="glyphicon glyphicon-plus whiteColor"></span>
-                    </a>
-                </p>
-            </div>
-            <div class="col-sm-8 container-fluid">
-                <p class ="navbar-text pull-left">
-                    <a href="page-list.view.client.html" class="navbar-link  visible-xs ">
-                        <span id="left-website-new"class = "glyphicon glyphicon-chevron-left whiteColor"></span>
-                    </a>
-                </p>
-                <a class="navbar-brand whiteColor" href="#">
-                    Edit Page
-                </a>
-                <p class="navbar-text pull-right">
-                    <a href="page-list.view.client.html" class="navbar-link ">
-                        <span id="ok-glyphicon-dualpane" class="glyphicon glyphicon-ok whiteColor"></span>
-                    </a>
-                </p>
-            </div>
-        </div>
+        <div class=" row
+    ">
+    <div class="col-sm-4 container-fluid hidden-xs ">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                <span class="glyphicon glyphicon-chevron-left whiteColor"></span>
+            </a>
+        </p>
+        <a class="navbar-brand whiteColor" id="Profile " href="#">
+            Pages
+        </a>
+        <p class="navbar-text pull-right">
+            <a ng-click="model.updatePage(model.page)" class="navbar-link ">
+                <span class="glyphicon glyphicon-plus whiteColor"></span>
+            </a>
+        </p>
+    </div>
+    <div class="col-sm-8 container-fluid">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link  visible-xs ">
+                <span id="left-website-new" class="glyphicon glyphicon-chevron-left whiteColor"></span>
+            </a>
+        </p>
+        <a class="navbar-brand whiteColor" href="#">
+            Edit Page
+        </a>
+        <p class="navbar-text pull-right">
+            <a ng-click="model.updatePage(model.page)" class="navbar-link ">
+                <span id="ok-glyphicon-dualpane" class="glyphicon glyphicon-ok whiteColor"></span>
+            </a>
+        </p>
+    </div>
+    </div>
     </div>
 </nav>
-<div class="container-fluid">
-    <div class="row ">
-        <div class="col-sm-4 hidden-xs ">
-
-            <ul class="list-inline">
-
-                <a href="../../widget/templates/widget-list.view.client.html">Blog Post</a>
-                <a class="pull-right" href="page-edit.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-            </ul>
-            <ul class="list-inline">
-
-                <a href="../../widget/templates/widget-list.view.client.html">Blogs</a>
-                <a class="pull-right" href="page-edit.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-            </ul>
-
-            <ul class="list-inline">
-
-                <a href="../../widget/templates/widget-list.view.client.html">Home</a>
-                <a class="pull-right" href="page-edit.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-            </ul>
-            <ul class="list-inline">
-
-                <a href="../../widget/templates/widget-list.view.client.html">About</a>
-                <a class="pull-right " href="page-edit.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-            </ul>
-
-            <ul class="list-inline">
-
-                <a href="../../widget/templates/widget-list.view.client.html">Contact Us</a>
-                <a class="pull-right " href="page-edit.view.client.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-            </ul>
-
-
-        </div>
-        <div class="v-line hidden-xs"></div>
-        <div class="col-sm-8">
-            <div >
-                <form>
-                    <div class="form-group ">
-                        <label for="Name">Name</label>
-                        <input type="text" class="form-control" id="Name" placeholder="Page Name">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" placeholder="Page Title">
-                    </div>
-                </form>
-                <a class="btn btn-danger  btn-block"
-                   href="page-list.view.client.html">Delete</a>
-            </div>
-
-        </div>
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
     </div>
-    <nav class="navbar navbar-default navbar-fixed-bottom blueColor">
-
-        <div class="container-fluid">
-            <p class="navbar-text pull-right">
-                <a href="../../user/templates/profile.view.client.html" class="pull-right"> <span class="glyphicon glyphicon-user whiteColor"></span></a>
-            </p>
+    <form>
+        <div class="form-group">
+            <label for="page-name">Name</label>
+            <input type="text"
+                   ng-model="model.page.name"
+                   class="form-control"
+                   id="page-name"
+                   placeholder="Blog Post">
+        </div>
+        <div class="form-group">
+            <label for="page-title">Title</label>
+            <input type="text"
+                   class="form-control"
+                   id="page-title"
+                   placeholder="A page to post the blogs of a user">
         </div>
 
-    </nav>
+        <a class="btn btn-danger btn-block"
+           ng-click="model.deletePage()">
+            Delete
+        </a>
+    </form>
 </div>
-</body>
-</html>
+<nav class="navbar navbar-default navbar-fixed-bottom blueColor">
+
+    <div class="container-fluid">
+        <p class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}" class="pull-right"> <span
+                    class="glyphicon glyphicon-user whiteColor"></span></a>
+        </p>
+    </div>
+
+</nav>
+</div>

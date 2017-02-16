@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Website-List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../../css/style.css" rel="stylesheet"/>
-</head>
-
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
 
     <div class="container-fluid">
         <div class="navbar-text pull-right">
-            <a href="website-new.view.client.html">
+            <a href="#/user/{{model.userId}}/website/new">
                 <span class="glyphicon glyphicon-plus whiteColor"></span>
             </a>
         </div>
         <div class="navbar-text pull-left">
-        <a href="../../../User/templates/profile.view.client.html">
+        <a href="#/user/{{model.userId}}">
                     <span class="glyphicon glyphicon-chevron-left whiteColor">
 
                     </span>
@@ -35,61 +24,26 @@
 
 </nav>
 
-<div class="container-fluid">
-    <div class="container-fluid">
-            <!--<h1>Profile</h1>-->
+<div class="container">
+    <ul class="list-group">
+        <li ng-repeat="website in model.websites" class="list-group-item borderless">
+            <a href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                {{website.name}}
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog">
+                </span>
 
-            <ul class="list-inline">
-
-                    <a href="website-edit.view.client.html" class = "pull-right">
-                        <span class = "glyphicon glyphicon-cog"></span>
-                    </a>
-
-                    <a href="../../../Page/page-list.view.client.html">
-                        Address Book App
-                    </a>
-            </ul>
-
-            <ul class="list-inline">
-                    <a href="website-edit.view.client.html" class = "pull-right">
-                        <span class = "glyphicon glyphicon-cog"></span>
-                    </a>
-
-                    <a href="../../../Page/page-list.view.client.html">
-                        Blogger
-                    </a>
-            </ul>
-
-            <ul class="list-inline">
-                <a href="website-edit.view.client.html" class = "pull-right">
-                    <span class = "glyphicon glyphicon-cog"></span>
-                </a>
-
-                <a href="../../../Page/page-list.view.client.html">
-                    Blogging App
-                </a>
-            </ul>
-
-            <ul class="list-inline">
-                <a href="website-edit.view.client.html" class = "pull-right">
-                    <span class = "glyphicon glyphicon-cog"></span>
-                </a>
-
-                <a href="../../../Page/page-list.view.client.html">
-                    Script Testing App
-                </a>
-            </ul>
-
-
-     </div>
-
+            </a>
+        </li>
+    </ul>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom blueColor">
     <div class="container-fluid">
 
         <div class="navbar-text pull-right">
-            <a href="../../../User/templates/profile.view.client.html">
+            <a href="#/user/{{model.userId}}">
                 <span class="glyphicon glyphicon-user whiteColor"></span>
             </a>
         </div>

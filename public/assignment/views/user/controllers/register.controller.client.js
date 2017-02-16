@@ -1,31 +1,36 @@
-(function(){
+(function () {
     angular
         .module("WebAppMaker")
-        .controller("registerController",registerController);
+        .controller("RegisterController", RegisterController);
 
-    function registerController($location,UserService){
+    function RegisterController($routeParams,UserService,$location) {
         var vm = this;
+        vm.createUser = createUser;
 
-        vm.addnew = addnew;
+        function createUser(username,password1,password2) {
+            if(username !== undefined && password1 === password2){
+                var newUser = {
+                    _id: new Date().getTime() + "",
+                    username: username,
+                    password: password1,
+                    firstName: "",
+                    lastName: ""
+                }
+                var result = UserService.createUser(newUser);
+                if(result){
+                    $location.url("/user/"+newUser._id);
+                }else{
+                    vm.error = "User not created";
+                }
+            }else{
+                if(username === undefined ) {
+                    vm.error = "Please enter a username";
+                }else if(password1 === undefined || password2 === undefined){
+                    vm.error = "Please enter password";
+                }else{
+                    vm.error = "Passwords do not match. Please check!!";
+                }
 
-        function addnew(user) {
-            if (user) {
-                var existuser = UserService.findUserByUsername(user.username);
-                if(!existuser) {
-                    if (user.password == user.vpassword) {
-                        nuser = UserService.createUser(user);
-                        $location.url("/user/" + nuser._id);
-                    }
-                    else {
-                        vm.error = "Passwords do not match."
-                    }
-                }
-                else{
-                    vm.error = "Username already exists."
-                }
-            }
-            else{
-                vm.error = "Error occured."
             }
         }
     }

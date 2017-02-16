@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Widget Heading</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
     <div class="container">
         <p class="navbar-text pull-left">
-            <a href="widget-list.view.client.html">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
                 <span class="glyphicon glyphicon-chevron-left whiteColor"></span>
             </a>
         </p>
@@ -19,7 +9,7 @@
             Widget Edit
         </a>
         <div class="navbar-text pull-right">
-            <a href="widget-list.view.client.html">
+            <a href="model.updateWidget(model.widget)">
           <span  class="glyphicon glyphicon-ok whiteColor">
           </span>
             </a>
@@ -29,33 +19,47 @@
 
 
 <div class="container">
-
-
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
     <form>
         <div class="form-group">
-            <label for="pagename">Name</label>
-            <input type="text" class="form-control" id="pagename">
+            <label for="widget-name">Name</label>
+            <input type="text"
+                   class="form-control"
+                   id="widget-name"
+                   placeholder="Name"
+                   value="">
         </div>
         <div class="form-group">
-            <label for="text">Text</label>
-            <input type="text" class="form-control" id="text" placeholder="US Senate Reaches Compromise on Energy">
+            <label for="widget-text">Text</label>
+            <input type="text"
+                   ng-model="model.widget.text"
+                   class="form-control"
+                   id="widget-text"
+                   placeholder="Text"
+                   value="Excellent play off">
         </div>
         <div class="form-group">
-            <label for="size">Size</label>
-            <input type="text" class="form-control" id="size" placeholder="3">
+            <label for="widget-size">Size</label>
+            <input type="text"
+                   ng-model="model.widget.size"
+                   class="form-control"
+                   id="widget-size"
+                   placeholder="Size"
+                   value="3">
         </div>
-
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">
+            Delete
+        </a>
     </form>
-    <a class="btn btn-danger  btn-block"
-       href="widget-list.view.client.html">Delete</a>
-
-
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom blueColor">
     <div class="container">
         <div class="navbar-text pull-right">
-            <a href="../../user/templates/profile.view.client.html">
+            <a href="#/user/{{model.userId}}">
           <span class="glyphicon glyphicon-user whiteColor">
           </span>
             </a>
