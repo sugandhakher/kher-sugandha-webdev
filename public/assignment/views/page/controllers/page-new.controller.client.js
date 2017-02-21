@@ -1,7 +1,3 @@
-/**
- * Created by sony on 15-02-2017.
- */
-
 (function(){
     angular
         .module("WebAppMaker")
@@ -12,6 +8,12 @@
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.createPage = createPage;
+
+
+        function init(){
+            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+        }
+        init();
 
         function createPage(pageName){
             var newPage = {

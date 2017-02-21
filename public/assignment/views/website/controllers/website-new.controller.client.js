@@ -11,11 +11,15 @@
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.createWebsite = createWebsite;
-
+        function init(){
+            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
+        }
+        init();
         function createWebsite(websiteName){
             var newWebsite = {
                 _id: new Date().getTime() + "",
-                name: websiteName
+                name: websiteName,
+                description: websiteName.description
             };
             var result = WebsiteService.createWebsite(vm.userId, newWebsite);
             if(result){

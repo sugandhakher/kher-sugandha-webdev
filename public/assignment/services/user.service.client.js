@@ -47,12 +47,13 @@
         }
 
         function findUserByCredentials(username,password){
-            for(var i in users){
-                if(users[i].username === username && users[i].password === password){
-                    return users[i];
-                }
-            }
-            return null;
+            return $http.get("/api/user?username="+username+ "&password="+password)
+            // for(var i in users){
+            //     if(users[i].username === username && users[i].password === password){
+            //         return users[i];
+            //     }
+            // }
+            // return null;
         }
 
         function updateUser(userId, newUser){

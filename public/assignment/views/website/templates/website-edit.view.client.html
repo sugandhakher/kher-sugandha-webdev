@@ -1,37 +1,30 @@
 <nav class="navbar navbar-default navbar-fixed-top blueColor">
     <div class="row container-fluid">
+
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
                 <a href="#/user/{{model.userId}}/website">
-                    <span class="glyphicon glyphicon-chevron-left whiteColor">
-
-                    </span>
-                </a>
+                    <span class="glyphicon glyphicon-chevron-left whiteColor"></span></a>
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand whiteColor">
-                    Websites
-                </a>
+                    Websites </a>
             </div>
-
             <div class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite(model.website)">
+                <a href= "#/user/{{model.userId}}/website/new">
                     <span class="glyphicon glyphicon-plus whiteColor">
 
                     </span>
                 </a>
             </div>
-
-
         </div>
+
         <div class="v-line hidden-xs"></div>
         <div class="col-sm-8">
             <div class="navbar-text pull-right">
-                <a href="#/user/{{model.userId}}/website">
+                <a  href= "#/user/{{model.userId}}/website">
                     <span class="glyphicon glyphicon-ok whiteColor">
-
-                    </span>
-                </a>
+                    </span></a>
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand no-left-padding no-left-margin whiteColor">
@@ -41,6 +34,7 @@
         </div>
     </div>
 </nav>
+
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs scroll">
         <div ng-if="model.error" class="alert alert-danger" role="alert">
@@ -63,15 +57,16 @@
             <div class="form-group">
                 <label for="websiteName">Website Name</label>
                 <input type="text"
-                       ng-model="model.website.name"
+                       ng-model="model.websiteDetails.name"
                        class="form-control"
                        id="websiteName"
-                       placeholder="SiteFly">
+                       placeholder="WebSite">
             </div>
             <div class="form-group">
                 <label for="websiteDescription">Website Description</label>
                 <textarea class="form-control"
-                          placeholder="Create a free website in seconds using your Facebook business page."
+                          ng-model="model.websiteDetails.description"
+                          placeholder="Create a free website in seconds using your page."
                           id="websiteDescription"
                           rows="5"></textarea>
             </div>
@@ -80,7 +75,7 @@
         </form>
 
         <a class="btn btn-danger  btn-block"
-           href="#/user/{{model.userId}}/website">Delete</a>
+           ng-click = "model.deleteWebsite()">Delete</a>
     </div>
 </div>
 
@@ -96,6 +91,3 @@
 
     </div>
 </nav>
-
-</body>
-</html>
