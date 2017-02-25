@@ -13,7 +13,7 @@ module.exports = function(app){
     ];
 
     function findUserById(req, res){
-        var userId = req.param.userId;
+        var userId = req.params.userId;
         var user = users.find(function (u){
             return u._id == userId;
         });
@@ -25,13 +25,12 @@ module.exports = function(app){
         var username = req.query.username;
         var password = req.query.password;
         var queryParams = req.query;
-        console.log(queryParams)
+        console.log(queryParams);
 
         var user = users.find(function(user){
             return user.password == password && user.username == username;
         });
-        console.log(user)
-
+        console.log(user);
         res.json(user);
 
     }

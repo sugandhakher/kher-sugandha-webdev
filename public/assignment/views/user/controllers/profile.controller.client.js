@@ -11,13 +11,22 @@
         vm.id = $routeParams.userId;
 
         function init(){
-            vm.user = UserService.findUserById(vm.id);
-        }
+            var promise = UserService.findUserById(vm.id);
+            promise.success(function(user){
+                vm.user = user;
+            });
 
+        }
         init();
 
         function updateUser(newUser){
-            UserService.updateUser(vm.id,newUser);
+            var user = UserService.updateUser(vm.id,newUser);
+            if (user!=null){
+                vm.message="User Successfully updated"
+            }
+            else{
+                vm.error = "Unable to update"
+            }
         }
 
         function deleteUser(){
