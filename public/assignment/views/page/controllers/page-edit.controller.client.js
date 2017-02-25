@@ -1,8 +1,3 @@
-/**
- * Created by sony on 15-02-2017.
- */
-
-
 (function(){
     angular
         .module("WebAppMaker")
@@ -42,4 +37,3 @@
         }
     }
 })();
-

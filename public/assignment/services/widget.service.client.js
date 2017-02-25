@@ -1,4 +1,3 @@
-
 (function(){
     angular
         .module("WebAppMaker")
@@ -33,13 +32,6 @@
         }
 
         function findWidgetsByPageId(pageId){
-            /*    var widgetsForPage = [];
-             for (var i in widgets){
-             if(widgets[i].pageId === pageId){
-             widgetsForPage.push(widgets[i]);
-             }
-             }
-             return widgetsForPage;*/
             return widgets;
         }
 

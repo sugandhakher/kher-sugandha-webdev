@@ -5,23 +5,14 @@
 
     function LoginController($location, UserService){
         var vm = this;
-        vm.login = login;
+        vm.login = function(username,password){
 
-        function init(){
-        }
-        init();
-
-        function login(user){
-
-            var promise = UserService
-                .findUserByCredentials(user.username, user.password);
-            promise.success(function(user){
-                if(user){
-                    $location.url("/user/"+userId);
-                }else {
-                    vm.error = "Check username and password"
-                }
-                });
+            var user = UserService.findUserByCredentials(username,password);
+            if(user){
+                $location.url("/user/"+user._id);
+            }else{
+                vm.error = "Please check username and password"
+            }
         }
     }
 })();

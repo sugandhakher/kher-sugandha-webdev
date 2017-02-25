@@ -9,12 +9,6 @@
         vm.websiteId = $routeParams.wid;
         vm.createPage = createPage;
 
-
-        function init(){
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-        }
-        init();
-
         function createPage(pageName){
             var newPage = {
                 _id: new Date().getTime() + "",
@@ -30,4 +24,3 @@
         }
     }
 })();
-

@@ -8,7 +8,6 @@
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
-        vm.widgetId = $routeParams.wgid
 
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;

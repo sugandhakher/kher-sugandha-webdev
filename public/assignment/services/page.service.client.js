@@ -24,7 +24,7 @@
 
         function createPage(websiteId, page){
             page.websiteId = websiteId;
-            pages.push(page)
+            pages.push(page);
             return page;
 
         }

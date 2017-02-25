@@ -3,6 +3,7 @@
  */
 module.exports = function(app){
     app.get("/api/user", findUserByCredentials);
+    app.get("/api/user/:userId", findUserById);
 
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -10,6 +11,15 @@ module.exports = function(app){
         {_id: "345", username: "billy",   password: "billy",   firstName: "Billy", lastName: "Joe"  },
         {_id: "456", username: "sugandha", password: "sugandha", firstName: "Sugandha",   lastName: "Kher" }
     ];
+
+    function findUserById(req, res){
+        var userId = req.param.userId;
+        var user = users.find(function (u){
+            return u._id == userId;
+        });
+        res.json(user);
+
+    }
 
     function findUserByCredentials(req, res){
         var username = req.query.username;
@@ -22,7 +32,7 @@ module.exports = function(app){
         });
         console.log(user)
 
-        res.send(user);
+        res.json(user);
 
     }
 }
