@@ -4,6 +4,7 @@
 module.exports = function(app){
     app.get("/api/user", findUserByCredentials);
     app.get("/api/user/:userId", findUserById);
+    app.put("/api/user/:userId", updateUser);
 
     var users = [
         {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -11,6 +12,20 @@ module.exports = function(app){
         {_id: "345", username: "billy",   password: "billy",   firstName: "Billy", lastName: "Joe"  },
         {_id: "456", username: "sugandha", password: "sugandha", firstName: "Sugandha",   lastName: "Kher" }
     ];
+
+    function updateUser(req, res){
+        var userId = req.params.userId;
+        var newUser = req.body;
+        for(var i in users){
+            if(users[i]._id === userId){
+                users[i].firstName = newUser.firstName;
+                users[i].lastName = newUser.lastName;
+                res.json(users[i]);
+                return;
+            }
+        }
+    }
+
 
     function findUserById(req, res){
         var userId = req.params.userId;

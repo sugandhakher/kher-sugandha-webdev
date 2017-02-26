@@ -59,14 +59,15 @@
         }
 
         function updateUser(userId, newUser){
-            for(var i in users){
-                if(users[i]._id === userId){
-                    users[i].firstName = newUser.firstName;
-                    users[i].lastName = newUser.lastName;
-                    return true;
-                }
-            }
-            return false;
+            return $http.put("/api/user/"+userId, newUser);
+            // for(var i in users){
+            //     if(users[i]._id === userId){
+            //         users[i].firstName = newUser.firstName;
+            //         users[i].lastName = newUser.lastName;
+            //         return true;
+            //     }
+            // }
+            // return false;
         }
 
         function deleteUser(userId){

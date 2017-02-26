@@ -20,13 +20,16 @@
         init();
 
         function updateUser(newUser){
-            var user = UserService.updateUser(vm.id,newUser);
-            if (user!=null){
-                vm.message="User Successfully updated"
-            }
-            else{
-                vm.error = "Unable to update"
-            }
+            UserService
+                .updateUser(vm.id,newUser)
+                .success(function(user){
+                    if (user!=null){
+                        vm.message="User Successfully updated"
+                    }
+                    else{
+                        vm.error = "Unable to update"
+                    }
+            });
         }
 
         function deleteUser(){
