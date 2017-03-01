@@ -26,7 +26,7 @@
         }
 
         function updateWebsite(websiteId, website){
-            return $http.put("/api/website/" + websiteId,website);
+            return $http.put("/api/website/" + websiteId, website);
         }
 
         function deleteWebsite(websiteId){

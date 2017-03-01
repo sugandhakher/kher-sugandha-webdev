@@ -3,7 +3,8 @@
     <div class="container-fluid">
 
         <div class="navbar-text pull-left">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+               class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left whiteColor">
 
                     </span>
@@ -28,31 +29,7 @@
                 Header
             </a>
         </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Label
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                HTML
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Text Input
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Link
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Button
-            </a>
-        </li>
+
         <li class="list-group-item borderless">
             <a ng-click="model.createWidget('IMAGE')">
                 Image
@@ -61,16 +38,6 @@
         <li class="list-group-item borderless">
             <a ng-click="model.createWidget('YOUTUBE')">
                 YouTube
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Data Table
-            </a>
-        </li>
-        <li class="list-group-item borderless">
-            <a href="">
-                Repeater
             </a>
         </li>
     </ul>

@@ -11,6 +11,7 @@
 
         vm.updatePage = updatePage;
         vm.deletePage = deletePage;
+        vm.pages = pages();
 
         function init(){
             PageService.findPageById(vm.pageId)
@@ -19,6 +20,13 @@
                 });
         }
         init();
+
+        function pages(){
+            PageService.findPageByWebsiteId(vm.websiteId)
+                .then(function(response){
+                    vm.pages = response.data;
+                });
+        }
 
         function updatePage(page){
             PageService.updatePage(vm.pageId, page)

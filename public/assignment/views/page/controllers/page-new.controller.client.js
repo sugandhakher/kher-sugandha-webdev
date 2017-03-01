@@ -8,6 +8,15 @@
         vm.userId = $routeParams.userId;
         vm.websiteId = $routeParams.wid;
         vm.createPage = createPage;
+        vm.pages = pages();
+
+
+        function pages(){
+            PageService.findPageByWebsiteId(vm.websiteId)
+                .then(function(response){
+                    vm.pages = response.data;
+                });
+        }
 
         function createPage(pageName){
             var newPage = {
