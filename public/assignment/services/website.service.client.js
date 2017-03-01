@@ -6,7 +6,7 @@
     function WebsiteService($http){
         var api = {
             createWebsite : createWebsite,
-            findWebsitesByUser : findWebsitesByUser,
+            findAllWebsitesForUser : findAllWebsitesForUser,
             findWebsiteById : findWebsiteById,
             updateWebsite : updateWebsite,
             deleteWebsite : deleteWebsite
@@ -14,28 +14,23 @@
         return api;
 
         function createWebsite(userId, website){
-            var url = "/api/user/" + userId + "/website";
-            return $http.post(url,website);
+            return $http.post("/api/user/" + userId + "/website",website);
         }
 
-        function findWebsitesByUser(userId){
-            var url = "/api/user/" + userId + "/website";
-            return $http.get(url);
+        function findAllWebsitesForUser(userId){
+            return $http.get("/api/user/" + userId + "/website");
         }
 
         function findWebsiteById(websiteId){
-            var url = "/api/website/" + websiteId;
-            return $http.get(url);
+            return $http.get("/api/website/" + websiteId);
         }
 
         function updateWebsite(websiteId, website){
-            var url = "/api/website/" + websiteId;
-            return $http.put(url,website);
+            return $http.put("/api/website/" + websiteId,website);
         }
 
         function deleteWebsite(websiteId){
-            var url = "/api/website/" + websiteId;
-            return $http.delete(url);
+            return $http.delete("/api/website/" + websiteId);
         }
     }
 })();

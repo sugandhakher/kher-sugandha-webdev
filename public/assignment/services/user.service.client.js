@@ -16,33 +16,27 @@
         return api;
 
         function createUser(user){
-            var url = "/api/user";
-            return $http.post(url,user);
+            return $http.post("/api/user",user);
 
         }
         function findUserById(userId){
-            var url = "/api/user/" + userId;
-            return $http.get(url);
+            return $http.get("/api/user/" + userId);
         }
 
         function findUserByUsername(username){
-            var url = "/api/user?username="+username;
-            return $http.get(url);
+            return $http.get("/api/user?username="+username);
         }
 
         function findUserByCredentials(username,password){
-            var url = "/api/user?username="+username+"&password="+password;
-            return $http.get(url);
+            return $http.get("/api/user?username="+username+"&password="+password);
         }
 
         function updateUser(userId, newUser){
-            var url = "/api/user/" + userId;
-            return $http.put(url, newUser);
+            return $http.put("/api/user/" + userId, newUser);
         }
 
         function deleteUser(userId){
-            var url = "/api/user/" + userId;
-            return $http.delete(url);
+            return $http.delete("/api/user/" + userId);
         }
 
     }

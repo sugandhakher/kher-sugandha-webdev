@@ -23,7 +23,7 @@ module.exports = function(app) {
         var user = req.body;
         user._id = (new Date()).getTime() + "";
         users.push(user);
-        res.send(user);
+        res.json(user);
     }
 
     function findUserByUsername(req, res) {
@@ -46,7 +46,7 @@ module.exports = function(app) {
             return user.password == password && user.username == username;
         });
         console.log(user);
-        res.send(user);
+        res.json(user);
     }
 
     function findUserById(req, res) {
@@ -54,7 +54,7 @@ module.exports = function(app) {
         var user = users.find(function (u) {
             return u._id == userId;
         });
-        res.send(user);
+        res.json(user);
 
     }
 
@@ -69,7 +69,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(200);
+        res.json(200);
     }
 
     function deleteUser(req, res) {
@@ -81,6 +81,6 @@ module.exports = function(app) {
                 return;
             }
         }
-        res.send(400);
+        res.json(400);
     }
 };
