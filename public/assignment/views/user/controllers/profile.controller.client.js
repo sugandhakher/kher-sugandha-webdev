@@ -1,3 +1,4 @@
+
 (function () {
     angular
         .module("WebAppMaker")
@@ -11,35 +12,40 @@
         vm.id = $routeParams.userId;
 
         function init(){
-            var promise = UserService.findUserById(vm.id);
-            promise.success(function(user){
-                vm.user = user;
-            });
-
+            UserService
+                .findUserById(vm.id)
+                .then(
+                    function(response){
+                        vm.user = response.data;
+                    });
         }
+
         init();
 
         function updateUser(newUser){
             UserService
                 .updateUser(vm.id,newUser)
-                .success(function(user){
-                    if (user!=null){
-                        vm.message="User Successfully updated"
+                .then(
+                    function(response){
+                        vm.success = "Updated succesfully";
+                    },
+                    function(error){
+                        vm.error = "Not able to update the user";
                     }
-                    else{
-                        vm.error = "Unable to update"
-                    }
-            });
+                );
         }
 
         function deleteUser(){
-            var result = UserService.deleteUser(vm.id);
-            if(result){
-                $location.url("/login");
-            }else{
-                vm.error = "User cannot be deleted";
-            }
+            UserService
+                .deleteUser()
+                .then(
+                    function(response){
+                        $location.url("/login");
+                    },
+                    function(error){
+                        vm.error = "Unable to delete the user";
+                    }
+                );
         }
-
     }
 })();

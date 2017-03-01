@@ -5,22 +5,17 @@
 
     function LoginController($location, UserService){
         var vm = this;
-        vm.login = login;
+        vm.login = function(username,password){
 
-        function login(user){
-
-            var promise = UserService
-                .findUserByCredentials(user.username,user.password);
-            promise
-                .success(function(user){
-                if(user!=null){
-                    $location.url("/user/"+user._id);
-                }else{
-                    vm.error = "Please check username and password"
-                }
-            })
-                .error(function(err) {
-                    vm.error = 'user not found';
+            UserService
+                .findUserByCredentials(username,password)
+                .then(function (response){
+                    var user = response.data;
+                    if(user._id){
+                        $location.url("/user/"+user._id);
+                    }else{
+                        vm.error = "User not found";
+                    }
                 });
         }
     }

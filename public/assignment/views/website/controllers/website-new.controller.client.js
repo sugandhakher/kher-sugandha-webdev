@@ -11,23 +11,19 @@
         var vm = this;
         vm.userId = $routeParams.userId;
         vm.createWebsite = createWebsite;
-        function init(){
-            vm.websites = WebsiteService.findWebsitesByUser(vm.userId);
-        }
-        init();
+
         function createWebsite(websiteName){
             var newWebsite = {
-                _id: new Date().getTime() + "",
-                name: websiteName,
-                description: websiteName.description
+                name: websiteName
             };
-            var result = WebsiteService.createWebsite(vm.userId, newWebsite);
-            if(result){
-                $location.url("/user/"+vm.userId+"/website");
-            }else{
-                vm.error = "Not able to create a website for the user";
-            }
-
+            WebsiteService.createWebsite(vm.userId, newWebsite)
+                .then(
+                    function(response){
+                        $location.url("/user/"+vm.userId+"/website");
+                    },
+                    function(error){
+                        vm.error = "Not able to create a website for the user";
+                    });
         }
     }
 })();
