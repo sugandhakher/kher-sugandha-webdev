@@ -64,7 +64,7 @@ module.exports = function(app) {
         for(var i in pages){
             if(pages[i]._id === pageId){
                 pages.splice(i,1);
-                res.send(200);
+                res.sendStatus(200);
                 return;
             }
         }
