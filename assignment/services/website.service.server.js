@@ -58,7 +58,7 @@ module.exports = function(app){
         for(var i in websites){
             if(websites[i]._id === websiteId){
                 websites[i].name = newWebsite.name;
-                res.send(200);
+                res.sendStatus(200);
                 return;
             }
         }
@@ -70,7 +70,7 @@ module.exports = function(app){
         for(var i in websites){
             if(websites[i]._id === websiteId){
                 websites.splice(i,1);
-                res.send(200);
+                res.sendStatus(200);
                 return;
             }
         }

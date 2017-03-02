@@ -12,6 +12,7 @@ module.exports = function(app) {
     app.get("/api/widget/:widgetId",findWidgetById);
     app.put("/api/widget/:widgetId",updateWidget);
     app.delete("/api/widget/:widgetId",deleteWidget);
+    app.post ("/api/uploads", upload.single('myFile'), uploadImage);
 
     var widgets=[
         { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -63,7 +64,7 @@ module.exports = function(app) {
         for (var i in widgets){
             if(widgets[i]._id === widgetId){
                 widgets[i] = widget;
-                res.send(200);
+                res.sendStatus(200);
                 return;
             }
         }
@@ -92,10 +93,10 @@ module.exports = function(app) {
         var myFile        = request.file;
 
         if(myFile) {
-            var originalname = myFile.originalname; // file name on user's computer
-            var filename = myFile.filename;     // new file name in upload folder
-            var path = myFile.path;         // full path of uploaded file
-            var destination = myFile.destination;  // folder where file is saved to
+            var originalname = myFile.originalname;
+            var filename = myFile.filename;
+            var path = myFile.path;
+            var destination = myFile.destination;
             var size = myFile.size;
             var mimetype = myFile.mimetype;
 
