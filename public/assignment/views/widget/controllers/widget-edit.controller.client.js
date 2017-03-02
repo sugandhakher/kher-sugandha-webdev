@@ -21,7 +21,8 @@
         init();
 
         function updateWidget(widget){
-            WidgetService.updateWidget(vm.widgetId,widget)
+            WidgetService
+                .updateWidget(vm.widgetId,widget)
                 .then(
                     function(success){
                         $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");

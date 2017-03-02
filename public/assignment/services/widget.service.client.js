@@ -37,7 +37,7 @@
         }
 
         function updateWidget(widgetId, widget){
-            return $http("/api/widget/"+widgetId, widgetId);
+            return $http("/api/widget/"+widgetId, widget);
             // for (var i in widgets){
             //     if(widgets[i]._id === widgetId){
             //         widgets[i] = widget;

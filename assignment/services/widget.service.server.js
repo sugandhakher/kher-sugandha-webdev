@@ -4,6 +4,8 @@
 
 module.exports = function(app) {
 
+    var multer = require('multer'); // npm install multer --save
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
     app.post("/api/page/:pageId/widget", createWidget);
     app.get("/api/page/:pageId/widget",findAllWidgetsForPage);
@@ -45,7 +47,7 @@ module.exports = function(app) {
     }
 
     function findWidgetById(req,res){
-        var widgetId = request.params.widgetId;
+        var widgetId = req.params.widgetId;
         for (var i in widgets){
             if(widgets[i]._id === widgetId){
                 res.json(widgets[i]);
@@ -80,5 +82,40 @@ module.exports = function(app) {
         res.send(400);
     }
 
+    function uploadImage(request, response) {
+
+        var widgetId      = request.body.widgetId;
+        var width         = request.body.width;
+        var userId        = request.body.userId;
+        var websiteId     = request.body.websiteId;
+        var pageId        = request.body.pageId;
+        var myFile        = request.file;
+
+        if(myFile) {
+            var originalname = myFile.originalname; // file name on user's computer
+            var filename = myFile.filename;     // new file name in upload folder
+            var path = myFile.path;         // full path of uploaded file
+            var destination = myFile.destination;  // folder where file is saved to
+            var size = myFile.size;
+            var mimetype = myFile.mimetype;
+
+            for (var i in widgets) {
+                if (widgets[i]._id === widgetId) {
+                    widgets[i].url = "/uploads/" + filename;
+                    if(width){
+                        widgets[i].width = width;
+                    }else{
+                        widgets[i].width = "100%";
+                    }
+
+                }
+            }
+            response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+        }else{
+            response.redirect("/assignment/#/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+        }
+
+
+    }
 
 };
