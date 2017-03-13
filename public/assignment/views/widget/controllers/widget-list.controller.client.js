@@ -11,14 +11,15 @@
 
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
+        $("#widgetList").sortable({
+            axis:"y"
+        });
 
         function init(){
             WidgetService.findWidgetsByPageId(vm.pageId)
                 .then(function(response){
                     vm.widgets = response.data;
-                    $(".widgetList").sortable({
-                        axis:"y"
-                    });
+
                 });
         }
         init();

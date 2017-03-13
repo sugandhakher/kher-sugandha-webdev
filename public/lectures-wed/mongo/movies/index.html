@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieApp">
+<head>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <!--<link href="css/style.css" rel="stylesheet"/>-->
+
+    <link href="../../../css/jquery-ui.css" rel="stylesheet"/>
+    <script src="../../../js/jquery.js"></script>
+    <script src="../../../js/jquery-ui.js"></script>
+    <script src="../../../js/jquery.ui.touch-punch.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+
+    <script src="app.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="MovieController as model">
+        <h1>Movies</h1>
+
+        <input  ng-model="model.movie.title"
+                class="form-control"
+                placeholder="title">
+        <button ng-click="model.createMovie(model.movie)"
+                class="btn btn-block btn-primary">
+            Create Movie
+        </button>
+        <button ng-click="model.updateMovie(model.movie)"
+                class="btn btn-block btn-success">
+            Update Movie
+        </button>
+
+        <ul class="list-group">
+            <li ng-repeat="movie in model.movies" class="list-group-item">
+                {{movie.title}}
+                <a ng-click="model.deleteMovie(movie._id)" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <a ng-click="model.selectMovie(movie._id)" class="pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!--{{model.movies}}-->
+    </div>
+</body>
+</html>
