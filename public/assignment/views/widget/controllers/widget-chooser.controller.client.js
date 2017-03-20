@@ -12,7 +12,7 @@
 
         function createWidget(widgetType){
             var newWidget = {
-                widgetType: widgetType
+                type: widgetType
             };
             WidgetService.createWidget(vm.pageId,newWidget)
                 .then(

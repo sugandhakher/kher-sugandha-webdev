@@ -1,0 +1,50 @@
+<nav class="navbar navbar-default navbar-fixed-top blueColor">
+    <div class="container">
+        <p class="navbar-text pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left whiteColor"></span>
+            </a>
+        </p>
+        <a class="navbar-brand whiteColor">
+            Widget Edit
+        </a>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.updateWidget(model.widget)" class="navbar-link">
+          <span  class="glyphicon glyphicon-ok whiteColor">
+          </span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <div ng-if="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <div ng-model="model.widget.text"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+    </div>
+
+    <div ng-bind-html="model.widget.text"></div>
+
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-danger btn-block">
+        Delete
+    </a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom blueColor">
+    <div class="container">
+        <div class="navbar-text pull-right">
+            <a href="#/user/{{model.userId}}">
+          <span class="glyphicon glyphicon-user whiteColor">
+          </span>
+            </a>
+        </div>
+    </div>
+</nav>

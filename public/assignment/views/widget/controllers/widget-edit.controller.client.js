@@ -13,7 +13,8 @@
         vm.deleteWidget = deleteWidget;
 
         function init(){
-            WidgetService.findWidgetById(vm.widgetId)
+            WidgetService
+                .findWidgetById(vm.widgetId)
                 .then(function(response){
                     vm.widget = response.data;
                 });
@@ -33,7 +34,8 @@
         }
 
         function deleteWidget(){
-            WidgetService.deleteWidget(vm.widgetId)
+            WidgetService
+                .deleteWidget(vm.widgetId)
                 .then(
                     function(success){
                         $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");

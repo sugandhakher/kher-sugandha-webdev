@@ -11,9 +11,23 @@
 
         vm.getSafeHtml = getSafeHtml;
         vm.getSafeUrl = getSafeUrl;
-        $("#widgetList").sortable({
-            axis:"y"
-        });
+        vm.reorderWidget = reorderWidget;
+
+        // $("#widgetList").sortable({
+        //     axis:"y"
+        // });
+
+        function reorderWidget(index1, index2){
+            WidgetService
+                .reorderWidget(vm.pageId, index1, index2)
+                .then(
+                    function(success){
+                        init();
+                    }, function(error){
+                        vm.error = "Not able to reorder"
+                    }
+                )
+        }
 
         function init(){
             WidgetService.findWidgetsByPageId(vm.pageId)

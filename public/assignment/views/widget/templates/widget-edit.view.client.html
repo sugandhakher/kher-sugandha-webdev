@@ -1,15 +1,21 @@
-<div ng-switch="model.widget.widgetType">
-    <div ng-switch-when="HEADER">
+<div ng-switch="model.widget.type">
+    <div ng-switch-when="HEADING">
         <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
     </div>
     <div ng-switch-when="IMAGE">
         <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
     </div>
-    <div ng-switch-when="YOUTUBE">
+    <div ng-switch-when="YOUTUBE" class="youtube-widget">
         <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
     </div>
+    <div ng-switch-when="HTML">
+        <ng-include src="'views/widget/templates/widget-html-edit.view.client.html'"></ng-include>
+    </div>
+    <div ng-switch-when="INPUT">
+        <ng-include src="'views/widget/templates/widget-text-edit.view.client.html'"></ng-include>
+    </div>
     <div ng-switch-default>
-        <div class="container">
+        <div class="container-fluid">
             <div class="alert alert-danger" role="alert">
                 Unable to edit the widget
             </div>
