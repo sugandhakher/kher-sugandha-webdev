@@ -28,7 +28,7 @@
         }
 
         return{
-            templateUrl: "/assignment/views/widget/widget-list/widget-list.html",
+            templateUrl: "/assignment/views/widget/templates/widget-list.html",
             scope:{
                 widgetList: "=data",
                 callback: "&",

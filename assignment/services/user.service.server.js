@@ -138,7 +138,7 @@ module.exports = function(app, models) {
             .updateUser(id, newUser)
             .then(
                 function(stats){
-                    res.send(200)
+                    res.sendStatus(200)
                 }, function(error){
                     res.statusCode(404).send(error);
                 }
