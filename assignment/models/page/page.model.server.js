@@ -4,6 +4,8 @@
 
 module.exports = function(){
     var mongoose = require("mongoose");
+
+    var q = require('q');
     var PageSchema = require("./page.schema.server")();
     var Page = mongoose.model("Page", PageSchema);
 

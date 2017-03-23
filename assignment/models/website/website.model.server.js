@@ -7,6 +7,8 @@ module.exports = function(){
     var WebsiteSchema = require("./website.schema.server.js")();
     var Website = mongoose.model("Website", WebsiteSchema);
 
+    var q = require('q');
+
     var api = {
         createWebsite: createWebsite,
         findAllWebsitesForUser: findAllWebsitesForUser,
@@ -31,12 +33,20 @@ module.exports = function(){
     }
 
     function updateWebsite(websiteId, website){
-        delete website._id;
-        return Website
-            .update({_id: websiteId}, {
-            $set: website
-            })
+        var deferred = q.defer();
+        Website.findByIdAndUpdate(websiteId, website, function(err, website) {
+            if(err)
+                deferred.reject(err);
+            else
+            {
+                deferred.resolve(website);
+            }
+        });
+
+        return deferred.promise;
+
     }
+
 
     function deleteWebsite(websiteId) {
         return Website.remove({_id: websiteId});

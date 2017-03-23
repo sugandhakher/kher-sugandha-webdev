@@ -8,6 +8,9 @@ module.exports = function(){
     var UserSchema = require("./user.schema.server.js")();
 
     var User = mongoose.model("User", UserSchema);
+
+    var q = require('q');
+
     var api = {
         createUser: createUser,
         findUserById: findUserById,
@@ -19,31 +22,85 @@ module.exports = function(){
     return api;
 
     function createUser(user){
-        return User.create(user);
+        var deferred = q.defer();
+        User.create(user, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+                deferred.resolve(user);
+        });
+
+        return deferred.promise;
+
     }
 
+
     function findUserById(userId){
-        return User.findById(userId);
+        var deferred = q.defer();
+        User.findById(userId, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+                deferred.resolve(user);
+        });
+
+        return deferred.promise;
+
     }
 
     function findUserByUsername(username){
-        return User.findOne({username: username});
+        var deferred = q.defer();
+        User.findOne({username: username}, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+                deferred.resolve(user);
+        });
+
+        return deferred.promise;
+
     }
 
     function findUserByCredentials(username, password){
-        return User.findOne({username: username, password: password});
+        var deferred = q.defer();
+        User.findOne({username: username, password: password}, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+                deferred.resolve(user);
+        });
+
+        return deferred.promise;
+
     }
 
-    function updateUser(userId, newUser){
-        delete newUser._id;
-        return User
-            .update({_id: userId},
-                {
-                    $set: newUser
-            })
+    function updateUser(userId, user){
+        var deferred = q.defer();
+        User.findByIdAndUpdate(userId, user, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+                deferred.resolve(user);
+        });
+
+        return deferred.promise;
+
     }
 
     function deleteUser(userId){
-        return User.remove({_id: userid});
+        var deferred = q.defer();
+        User.findByIdAndRemove(userId, function(err, user) {
+            if(err)
+                deferred.reject(err);
+            else
+            {
+                user.remove();
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+
     }
+
 };
