@@ -1,10 +1,20 @@
 /**
  * Created by sony on 01-03-2017.
  */
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app, models) {
 
     var userModel = models.userModel;
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/#/user',
+            failureRedirect: '/#/login'
+        }));
 
     app.post("/api/user", createUser);
     app.get("/api/user", findUserByUsername);
@@ -13,21 +23,96 @@ module.exports = function(app, models) {
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
 
-
-    // var users = [
-    //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Jannunzi" }
-    // ];
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/logout', logout);
 
 
-    // function createUser(req, res) {
-    //     var user = req.body;
-    //     user._id = (new Date()).getTime() + "";
-    //     users.push(user);
-    //     res.json(user);
-    // }
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+    passport.use(new LocalStrategy(localStrategy));
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        developerModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function (facebookUser) {
+                    if (facebookUser) {
+                        return done(null, facebookUser);
+                    } else {
+                        facebookUser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        }
+                    }
+                    userModel.createUser(facebookUser)
+                        .then(
+                            function (user) {
+                                done(null, user);
+                            }
+                        );
+                }
+            )
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+
+    function deserializeUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function localStrategy(username, password, done) {
+        userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if(user.username === username && user.password === password) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+
 
     function createUser(req, res){
         var user = req.body;
@@ -42,14 +127,6 @@ module.exports = function(app, models) {
             );
     }
 
-    // function findUserById(req, res) {
-        //     var userId = req.params.userId;
-        //     var user = users.find(function (u) {
-        //         return u._id == userId;
-        //     });
-        //     res.json(user);
-        //
-        // }
 
     function findUserById(req, res){
         var id = req.params.userId;
@@ -65,19 +142,6 @@ module.exports = function(app, models) {
     }
 
 
-
-    // function findUserByUsername(req, res) {
-    //     var username = req.query['username'];
-    //     var user = users.find(function(u){
-    //         return u.username == username;
-    //     });
-    //     if(user) {
-    //         res.send(user);
-    //     } else {
-    //         res.sendStatus(404).send('User not found for username: ' + username);
-    //     }
-    // }
-    
     function findUserByUsername(req, res){
         var username = req.query['username'];
         userModel
@@ -91,16 +155,6 @@ module.exports = function(app, models) {
             )
     }
 
-    // function findUserByCredentials(req, res) {
-    //     var username = req.query.username;
-    //     var password = req.query.password;
-    //     var queryParams = req.query;
-    //     var user = users.find(function (user) {
-    //         return user.password == password && user.username == username;
-    //     });
-    //     console.log(user);
-    //     res.json(user);
-    // }
 
     function findUserByCredentials(req, res){
         var username = req.query.username;
@@ -117,20 +171,6 @@ module.exports = function(app, models) {
     }
 
 
-    // function updateUser(req, res) {
-    //     var userId = req.params.userId;
-    //     var newUser = req.body;
-    //     for (var i in users) {
-    //         if (users[i]._id === userId) {
-    //             users[i].firstName = newUser.firstName;
-    //             users[i].lastName = newUser.lastName;
-    //             res.send(users[i]);
-    //             return;
-    //         }
-    //     }
-    //     res.json(200);
-    // }
-
     function updateUser(req, res){
         var id = req.params.userId;
         var newUser = req.body;
@@ -145,17 +185,6 @@ module.exports = function(app, models) {
             );
     }
 
-    // function deleteUser(req, res) {
-    //     var id = req.params.userId;
-    //     for (var i in users) {
-    //         if (users[i]._id === id) {
-    //             users.splice(i, 1);
-    //             res.send(200);
-    //             return;
-    //         }
-    //     }
-    //     res.json(400);
-    // }
 
     function deleteUser(req, res){
         var id = req.params.userId;
