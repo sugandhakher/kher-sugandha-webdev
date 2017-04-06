@@ -8,7 +8,7 @@ function Config($routeProvider){
             templateUrl: 'login.html'
         })
         .when('/register',{
-            templateUrl: 'register.html'
+            templateUrl: 'register.view.html'
         });
 
 }

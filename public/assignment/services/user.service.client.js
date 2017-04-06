@@ -10,25 +10,10 @@
             findUserByUsername : findUserByUsername,
             findUserByCredentials : findUserByCredentials,
             updateUser : updateUser,
-            deleteUser : deleteUser,
-            logout : logout,
-            login: login
+            deleteUser : deleteUser
         };
 
         return api;
-
-        function logout(){
-            return $http.post("/api/logout");
-        }
-
-        function login(username,password){
-            var user = {
-                username: username,
-                password: password
-            };
-            return $http.post("/api/login",user);
-        }
-
 
         function createUser(user){
             return $http.post("/api/user",user);

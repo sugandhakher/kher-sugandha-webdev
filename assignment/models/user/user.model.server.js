@@ -17,14 +17,9 @@ module.exports = function(){
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser,
-        findUserByFacebookId: findUserByFacebookId
+        deleteUser: deleteUser
     };
     return api;
-
-    function findUserByFacebookId(facebookId) {
-        return User.findOne({'facebook.id': facebookId});
-    }
 
     function createUser(user){
         var deferred = q.defer();
