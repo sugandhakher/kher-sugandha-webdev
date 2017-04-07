@@ -1,0 +1,382 @@
+<section id="home">
+    <div id="main-slider" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+            <li data-target="#main-slider" data-slide-to="1"></li>
+            <li data-target="#main-slider" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img class="img-responsive" src="../img/img1.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>Register For the Latest Events</h2>
+                    <a target="_blank" href="https://www.eventbrite.com/">Learn More<i
+                            class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="../img/img2.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>Register For the Latest Events</h2>
+                    <a target="_blank" href="https://www.eventbrite.com/">Learn More<i
+                            class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            <div class="item">
+                <img class="img-responsive" src="../img/img3.jpg" alt="slider">
+                <div class="carousel-caption">
+                    <h2>Register For the Latest Events</h2>
+                    <a target="_blank" href="https://www.eventbrite.com/">Learn More <i
+                            class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/#home-->
+
+<section id="explore">
+    <div class="container">
+        <div class="row">
+            <div class="watch">
+                <img class="img-responsive" src="../img/img4.jpg" alt="">
+            </div>
+            <div class="col-md-4 col-md-offset-2 col-sm-5">
+                <h2>Search For Events</h2>
+            </div>
+            <div class="col-sm-7 col-md-6">
+                <form name="SearchEventForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input name=location
+                                   id="location"
+                                   type="text"
+                                   ng-model="location"
+                                   class="form-control col-md-6"
+                                   required
+                                   placeholder="Enter Location"/>
+                            <div ng-show="SearchEventForm.location.$invalid && SearchEventForm.$submitted">
+                            <span class="error">
+                                Please enter a location!!
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="eventname"
+                                   id="eventname"
+                                   type="text"
+                                   ng-model="event"
+                                   required
+                                   class="form-control col-md-6"
+                                   placeholder="Event to search"/>
+                            <div ng-show="SearchEventForm.eventname.$invalid && SearchEventForm.$submitted">
+                            <span class="error">
+                                  Please enter an event!!
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" ng-click="model.searchEvent(event,location,SearchEventForm)"
+                            class="btn btn-primary btn-block">
+                        Search
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="event">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-9">
+                <div id="event-carousel" class="carousel slide" data-interval="false">
+                    <h2 class="heading">THE PERFORMERS</h2>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/Alex_Gaskarth_2.jpg"
+                                             alt="event-image">
+                                        <h4>Alex Gaskarth</h4>
+                                        <h5>Lead Vocal</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/jack.jpg"
+                                             alt="event-image">
+                                        <h4>Jack Barakat</h4>
+                                        <h5>Lead Guitar, Backing vocals</h5>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/zack.jpg"
+                                             alt="event-image">
+                                        <h4>Zack Merrick </h4>
+                                        <h5>Bass Guitar</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="single-event">
+                                        <img class="img-responsive" src="../img/Rian.jpg"
+                                             alt="event-image">
+                                        <h4>Rian Dawson</h4>
+                                        <h5>Drums</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="guitar">
+                <img class="img-responsive" src="../img/guitar.jpg" alt="guitar">
+            </div>
+        </div>
+    </div>
+</section><!--/#event-->
+
+<section id="about">
+    <div class="guitar2">
+        <!--<img class="img-responsive" src="../img/project-images/guitar2.jpg" alt="guitar">-->
+    </div>
+    <div class="about-content">
+        <h2>About EventSmart</h2>
+        <p>I have created a website which will allow users to search for events of their interest and also book tickets
+            at the EventBrite site.This site gives a user friendly access to events of their choice and search for their
+            favourite categories. Moreover they can like, review and follow other users.
+        </p>
+    </div>
+</section><!--/#about-->
+
+<div ng-if="!currentUser">
+    <section id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Login Here</h2>
+                    <div ng-if="model.LoginError" class="alert alert-danger" role="alert">
+                        {{model.LoginError}}
+                    </div>
+                    <div ng-if="model.LoginSuccess" class="alert alert-info" role="alert">
+                        {{model.LoginSuccess}}
+                    </div>
+                    <form name="LoginForm" novalidate>
+                        <div class="form-group">
+                            <input name="username"
+                                   id="username"
+                                   type="text"
+                                   ng-model="username"
+                                   class="form-control"
+                                   required
+                                   placeholder="username"/>
+                            <div ng-show="LoginForm.username.$invalid && LoginForm.$submitted">
+                            <span class="error">
+                            Please enter a username
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input name="password"
+                                   id="password"
+                                   type="password"
+                                   ng-model="password"
+                                   required
+                                   class="form-control"
+                                   placeholder="password"/>
+                            <div ng-show="LoginForm.password.$invalid && LoginForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" ng-click="model.login(username,password,LoginForm)"
+                                    class="btn btn-primary btn-block">
+                                Login
+                            </button>
+                            <a href="/auth/google" class="btn btn-danger btn-block">
+                                <i class="fa fa-google"></i>
+                                Login with Google
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <h2>Register Here</h2>
+                    <div ng-if="model.RegisterError" class="alert alert-danger" role="alert">
+                        {{model.RegisterError}}
+                    </div>
+                    <div ng-if="model.RegisterSuccess" class="alert alert-info" role="alert">
+                        {{model.RegisterSuccess}}
+                    </div>
+                    <form name="RegisterForm" novalidate>
+                        <div class="form-group">
+                            <label for="username1">Username</label>
+                            <input name="registername"
+                                   id="username1"
+                                   type="text"
+                                   ng-model="registername"
+                                   class="form-control"
+                                   required
+                                   placeholder="username"/>
+                            <div ng-show="RegisterForm.registername.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                            Please enter a username
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input ng-model="emailid"
+                                   name="email"
+                                   type="email"
+                                   required
+                                   class="form-control"
+                                   id="email"
+                                   placeholder="abc@example.com">
+                            <div ng-show="RegisterForm.email.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Invalid email
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">Password</label>
+                            <input name="registerpassword"
+                                   id="password1"
+                                   type="password"
+                                   ng-model="registerpassword"
+                                   required
+                                   class="form-control"
+                                   placeholder="password"/>
+                            <div ng-show="RegisterForm.registerpassword.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password2">Verify Password</label>
+                            <input name="verifypassword"
+                                   id="password2"
+                                   type="password"
+                                   ng-model="verifypassword"
+                                   required
+                                   class="form-control"
+                                   placeholder="Verify Password"/>
+                            <div ng-show="RegisterForm.verifypassword.$invalid && RegisterForm.$submitted">
+                            <span class="error">
+                                Please enter a password
+                            </span>
+                            </div>
+                            <div ng-if="model.passwordError">
+                            <span class="error">
+                                {{model.passwordError}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit"
+                                    ng-click="model.register(registername,registerpassword,emailid,RegisterForm)"
+                                    class="btn btn-primary btn-block">
+                                SignUp
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<section id="contact">
+    <div class="contact-section">
+        <div class="ear-piece">
+            <img class="img-responsive" src="../img/ear.jpg" alt="">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 col-sm-offset-4">
+                    <div class="contact-text">
+                        <h3>Contact</h3>
+                        <address>
+                            E-mail: aeshu08@gmail.com<br>
+                            Phone: +1 (857) 6544574<br>
+                        </address>
+                    </div>
+                    <div class="contact-address">
+                        <h3>Address</h3>
+                        <address>
+                            Northeastern University<br>
+                            370 Huntington Avenue,<br>
+                            Boston, MA 02120<br>
+                            USA
+                        </address>
+                    </div>
+                </div>
+                <div id="contact-section">
+                    <h3>Send a message</h3>
+                    <div class="col-sm-5">
+                        <div ng-if="model.messageSuccess" class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Success!!! </strong> {{model.messageSuccess}}
+                        </div>
+
+                        <div ng-if="model.messageError" class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Error!!! </strong> {{model.messageError}}
+                        </div>
+                        <form id="main-contact-form"
+                              class="contact-form"
+                              name="contactForm"
+                              novalidate>
+                            <div class="form-group">
+                                <input type="text"
+                                       name="name"
+                                       ng-model="model.email.username"
+                                       class="form-control"
+                                       required data-validation-required-message="Please enter your name."
+                                       placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email"
+                                       name="email"
+                                       ng-model="model.email.fromMail"
+                                       class="form-control"
+                                       required data-validation-required-message="Please enter your email address."
+                                       placeholder="Email ID">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message"
+                                          id="message"
+                                          required="required"
+                                          class="form-control"
+                                          ng-model="model.email.message"
+                                          rows="4"
+                                          required data-validation-required-message="Please enter a message."
+                                          placeholder="Enter your message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit"
+                                        ng-click="model.sendMail(model.email,contactForm)"
+                                        class="btn btn-primary pull-right">Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
