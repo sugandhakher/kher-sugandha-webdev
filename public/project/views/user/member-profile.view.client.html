@@ -10,12 +10,12 @@
     <div class="col-md-9">
         <div class="card hovercard col-md-9">
             <div class="card-background">
-                <img class="card-bkimg" alt="" src="../../../img/img5.jpeg">
+                <img class="card-bkimg" alt="" src="../../../img/project-images/profile-bg.jpg">
                 <!-- http://lorempixel.com/850/280/people/9/ -->
             </div>
             <div class="useravatar">
                 <img ng-if="model.visitedUser.url" alt="" ng-src="{{model.visitedUser.url}}">
-                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/user.png">
+                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/project-images/user.png">
             </div>
             <div class="card-info"><span class="card-title">{{model.visitedUser.username}}</span>
 
@@ -40,7 +40,7 @@
                  class="card-info">
                 <span class="card-title">
                     <a ng-click="model.unFollowUser()"
-                       class="btn btn-danger btn-default">
+                        class="btn btn-danger btn-default">
                         <span class="glyphicon glyphicon-user"></span> UnFollow</a>
                 </span>
             </div>
@@ -84,48 +84,48 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1">
                     <div class="row">
-                        <div class=" col-md-9 col-lg-9 ">
-                            <table class="table table-user-information">
-                                <tbody>
-                                <tr>
-                                    <td>FirstName:</td>
-                                    <td>{{model.visitedUser.firstName}}</td>
-                                </tr>
-                                <tr>
-                                    <td>LastName:</td>
-                                    <td>{{model.visitedUser.lastName}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Date of Birth</td>
-                                    <td>{{model.visitedUser.date}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email Id</td>
-                                    <td>{{model.visitedUser.email}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Employment Status</td>
-                                    <td>{{model.visitedUser.employed}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Company Name</td>
-                                    <td>{{model.visitedUser.company}}</td>
-                                </tr>
-                                <tr>
-                                    <td>About Myself</td>
-                                    <td><p>{{model.visitedUser.description}}</p></td>
-                                </tr>
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>FirstName:</td>
+                                <td>{{model.visitedUser.firstName}}</td>
+                            </tr>
+                            <tr>
+                                <td>LastName:</td>
+                                <td>{{model.visitedUser.lastName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Date of Birth</td>
+                                <td>{{model.visitedUser.date}}</td>
+                            </tr>
+                            <tr>
+                                <td>Email Id</td>
+                                <td>{{model.visitedUser.email}}</td>
+                            </tr>
+                            <tr>
+                                <td>Employment Status</td>
+                                <td>{{model.visitedUser.employed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Company Name</td>
+                                <td>{{model.visitedUser.company}}</td>
+                            </tr>
+                            <tr>
+                                <td>About Myself</td>
+                                <td><p>{{model.visitedUser.description}}</p></td>
+                            </tr>
 
-                                </tbody>
-                            </table>
+                            </tbody>
+                        </table>
 
-                            Connect with me on <a target="_blank" ng-src="{{model.visitedUser.facebooklink}}">
-                            <span class="fa fa-facebook"></span>Facebook</a> |
-                            <a target="_blank" ng-src="model.visitedUser.linkedin">
-                                <span class="fa fa-linkedin"></span>LinkedIn</a>
+                        Connect with me on <a target="_blank" ng-src="{{model.visitedUser.facebooklink}}">
+                                <span class="fa fa-facebook"></span>Facebook</a> |
+                                <a target="_blank" ng-src="model.visitedUser.linkedin">
+                                    <span class="fa fa-linkedin"></span>LinkedIn</a>
+                    </div>
                         </div>
                     </div>
-                </div>
                 <div class="tab-pane fade in" id="tab2">
                     <div class="row">
                         <div class="col-xs-6 col-sm-4 col-lg-4 col-md-4" ng-repeat="event in model.visitedUserEvents">

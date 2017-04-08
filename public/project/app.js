@@ -1,44 +1,47 @@
 /**
- * Created by sugandhakher on 4/6/17.
+ * Created by shaileshpujari on 5/25/16.
  */
-
-(function(){
+// IIFEE Design Patthern (Immediately invoked function expression
+// (function(){})();
+(function () {
     angular
-        .module("BookMyEvent", ["ngRoute", "ngRating"])
-        .controller("EventController", EventController);
+        .module("EventSmart", ["ngRoute","ngRating"])
+        .controller("IndexController", IndexController);
 
 
-    function EventController($location, $anchorScroll, UserService, $route, $rootScope){
+    function IndexController($location, $anchorScroll, UserService, $route,$rootScope) {
         var vm = this;
         vm.scrollTo = scrollTo;
         vm.logout = logout;
         vm.searchEvent = searchEvent;
-
-        function searchEvent(eventName, SearchEventForm){
-            if($('#srch-term').val()!= "")
+        
+        function searchEvent(eventName,SearchEventForm) {
+            if($('#srch-term').val() != "")
                 $location.url("/event/" + eventName + "/location/boston");
         }
+
+        function scrollTo(id) {
+            $location.url("/");
+            var old = $location.hash();
+            $location.hash(id);
+            $anchorScroll();
+            //reset to old to keep any additional routing logic from kicking in
+            $location.hash(old);
+        }
+
         function logout(){
             UserService
                 .logout()
                 .then(
-                    function(res){
+                    function(response){
                         $location.url("/");
                         $route.reload();
-                    }, function (error){
+                    },
+                    function(error){
                         $location.url("/");
                         $route.reload();
                     }
-                )
+                );
         }
-
-        function scrollTo(id){
-            $location.url("/");
-            var old = $location.hash();
-            $location.hash(id);
-            location.hash(old);
-        }
-
-
     }
 })();

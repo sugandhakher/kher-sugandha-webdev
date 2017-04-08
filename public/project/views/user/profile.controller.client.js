@@ -1,9 +1,6 @@
-/**
- * Created by sugandhakher on 4/6/17.
- */
 (function () {
     angular
-        .module("BookMyEvent")
+        .module("EventSmart")
         .controller("ProfileController", ProfileController);
 
     function ProfileController($rootScope,UserService) {
@@ -11,7 +8,7 @@
         vm.user = $rootScope.currentUser;
         vm.updateUser = updateUser;
         vm.getProfileImage = getProfileImage;
-
+        
         function init(){
             UserService
                 .findUserById(vm.user._id)

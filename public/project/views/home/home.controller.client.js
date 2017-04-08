@@ -1,13 +1,9 @@
-/**
- * Created by sugandhakher on 4/6/17.
- */
-
 (function () {
     angular
-        .module("BookMyEvent")
-        .controller("HomeController", HomeController);
+        .module("EventSmart")
+        .controller("HomePageController", HomePageController);
 
-    function HomeController($location, $anchorScroll, UserService, $rootScope, $route, $http) {
+    function HomePageController($location, $anchorScroll, UserService, $rootScope, $route, $http) {
         var vm = this;
         vm.searchEvent = searchEvent;
         vm.login = login;

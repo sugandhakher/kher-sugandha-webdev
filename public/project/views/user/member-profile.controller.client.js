@@ -1,11 +1,7 @@
-/**
- * Created by sugandhakher on 4/6/17.
- */
-
 (function () {
     angular
-        .module("BookMyEvent")
-        .controller("MemberController", MemberController);
+        .module("EventSmart")
+        .controller("MemberProfileController", MemberProfileController);
 
     function MemberProfileController(EventService, UserService, $route, $routeParams, $location, $rootScope, MemberProfileService, $anchorScroll) {
         var vm = this;
