@@ -1,5 +1,5 @@
 /*
-describe how all the users look like
+ describe how all the users look like
  */
 
 module.exports = function () {
@@ -8,7 +8,7 @@ module.exports = function () {
         username: {type: String, required: true},
         password: String,
         firstName: String,
-        google:{
+        facebook: {
             token: String,
             id: String,
             displayName: String
@@ -27,6 +27,6 @@ module.exports = function () {
         dateCreated: {type: Date, default: Date.now},
         eventsLiked: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
     }, {collection: "project.user"});
-    
+
     return UserSchema;
 };

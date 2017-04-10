@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .controller("ProfileController", ProfileController);
 
     function ProfileController($rootScope,UserService) {
@@ -22,7 +22,7 @@
             if(vm.user.url){
                 return vm.user.url;
             }else{
-                return "../../../img/project-images/user.png";
+                return "../../../img/project-images/userlogo.png";
             }
         }
 

@@ -1,49 +1,50 @@
-(function(){
+(function () {
     angular
-        .module("EventSmart")
-        .controller("EventSearchListController",EventSearchListController);
+        .module("BookMyEvent")
+        .controller("EventSearchListController", EventSearchListController);
 
-    function EventSearchListController($routeParams,EventService){
+    function EventSearchListController($routeParams, EventService) {
         var vm = this;
         vm.event = $routeParams.eventName;
         vm.location = $routeParams.location;
         vm.getSafeImageUrl = getSafeImageUrl;
         vm.eventByCategory = eventByCategory;
 
-        function init(){
+        function init() {
             EventService.getCategories()
                 .then(
-                    function(response){
+                    function (response) {
                         vm.categories = response.data.categories;
                     },
-                    function(error){
-                        vm.categories=[];
+                    function (error) {
+                        vm.categories = [];
                     }
                 );
 
             EventService.getEvents(vm.event, vm.location)
                 .then(
-                    function(events){
+                    function (events) {
                         vm.events = events.data.events;
                     },
-                    function(error){
+                    function (error) {
                         vm.error = "Search did not match any results!!!"
                     }
                 );
 
         }
+
         init();
 
-        function getSafeImageUrl(logo){
-            if(logo){
+        function getSafeImageUrl(logo) {
+            if (logo) {
                 return logo.url;
-            }else{
-                return "../../../img/project-images/ear-piece.png";
+            } else {
+                return "../../../img/project-images/contact.png";
             }
         }
 
-        function eventByCategory(category){
-            vm.event = category.replace('&',"and");
+        function eventByCategory(category) {
+            vm.event = category.replace('&', "and");
             init();
         }
     }

@@ -1,12 +1,12 @@
 /*
-Will hold all the user related crud operations
+ Will hold all the user related crud operations
  */
 module.exports = function () {
 
     var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server.js")();
     // create entity manager i.e. object that provides api to talk to db
-    var UserInfo = mongoose.model("UserInfo",UserSchema);
+    var UserInfo = mongoose.model("UserInfo", UserSchema);
     var api = {
         createUser: createUser,
         findUserById: findUserById,
@@ -14,25 +14,27 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        //findFacebookUser: findFacebookUser,
-        findAllUsers : findAllUsers,
-        findUserByGoogleId: findUserByGoogleId
+        findFacebookUser: findFacebookUser,
+        findAllUsers: findAllUsers,
+
+
     };
     return api;
-    
+
     function createUser(user) {
         return UserInfo.create(user);
     }
 
-    function findUserByGoogleId(googleId){
-        return UserInfo.findOne({"google.id": googleId})
+
+    function findFacebookUser(facebookId) {
+        return User.findOne({"facebook.id": facebookId})
     }
 
-    function findUserById(userId){
+    function findUserById(userId) {
         return UserInfo.findById(userId);
     }
 
-    function findUserByCredentials(username,password) {
+    function findUserByCredentials(username, password) {
         return UserInfo.findOne({username: username, password: password});
     }
 
@@ -40,19 +42,19 @@ module.exports = function () {
         return UserInfo.findOne({username: username});
     }
 
-    function updateUser(userId, newUser){
+    function updateUser(userId, newUser) {
         delete newUser._id;
         return UserInfo
-            .update({_id: userId},{
+            .update({_id: userId}, {
                 $set: newUser
             })
     }
 
-    function findAllUsers(){
+    function findAllUsers() {
         return UserInfo.find({role: "user"});
     }
 
-    function deleteUser(userId){
+    function deleteUser(userId) {
         return UserInfo.remove({_id: userId});
     }
 };

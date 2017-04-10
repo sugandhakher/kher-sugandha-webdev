@@ -1,50 +1,42 @@
-/**
- * Created by shaileshpujari on 5/28/16. for the Event Smart Project
- */
-(function(){
+(function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .factory("MemberProfileService", MemberProfileService);
 
-    function MemberProfileService($http){
-        var api={
-            createUser : createUser,
-            findUserByUsername : findUserByUsername,
-            updateUser : updateUser,
+    function MemberProfileService($http) {
+        var api = {
+            createUser: createUser,
+            findUserByUsername: findUserByUsername,
+            updateUser: updateUser,
             findAllUsers: findAllUsers,
-            deleteUser : deleteUser
+            deleteUser: deleteUser
         };
 
         return api;
 
-        function createUser(user){
-            var url = "/project/follow/user";
-            return $http.post(url,user);
+        function createUser(user) {
+            return $http.post("/project/follow/user", user);
 
         }
-        function findUserById(userId){
-            var url = "/project/user/" + userId;
-            return $http.get(url);
+
+        function findUserById(userId) {
+            return $http.get("/project/user/" + userId);
         }
 
-        function findUserByUsername(username){
-            var url = "/project/follow/user/"+username;
-            return $http.get(url);
+        function findUserByUsername(username) {
+            return $http.get("/project/follow/user/" + username);
         }
 
-        function updateUser(userId, newUser){
-            var url = "/project/follow/user/" + userId;
-            return $http.put(url, newUser);
+        function updateUser(userId, newUser) {
+            return $http.put("/project/follow/user/" + userId, newUser);
         }
 
-        function deleteUser(userId){
-            var url = "/api/user/" + userId;
-            return $http.delete(url);
+        function deleteUser(userId) {
+            return $http.delete("/api/user/" + userId);
         }
 
-        function findAllUsers(){
-            var url = "/project/follow/users";
-            return $http.get(url);
+        function findAllUsers() {
+            return $http.get("/project/follow/users");
         }
 
     }

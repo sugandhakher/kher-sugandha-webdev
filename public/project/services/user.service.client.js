@@ -1,83 +1,72 @@
-/**
- * Created by shaileshpujari on 5/28/16. for the Event Smart Project
- */
-(function(){
+(function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .factory("UserService", UserService);
 
-    function UserService($http){
-        var api={
-            createUser : createUser,
-            login : login,
-            findUserById : findUserById,
-            findUserByUsername : findUserByUsername,
-            findUserByCredentials : findUserByCredentials,
-            updateUser : updateUser,
-            deleteUser : deleteUser,
-            logout : logout,
-            loggedIn : loggedIn,
+    function UserService($http) {
+        var api = {
+            createUser: createUser,
+            login: login,
+            findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
+            findUserByCredentials: findUserByCredentials,
+            updateUser: updateUser,
+            deleteUser: deleteUser,
+            logout: logout,
+            loggedIn: loggedIn,
             register: register,
             getUsers: getUsers
         };
 
         return api;
 
-        function logout(){
+        function logout() {
             return $http.post("/api/logout");
         }
 
-        function loggedIn(){
+        function loggedIn() {
             return $http.get("/api/loggedIn")
         }
 
-        function login(username,password){
+        function login(username, password) {
             var user = {
                 username: username,
                 password: password
             };
-            var url = "/api/login";
-            return $http.post(url,user);
+            return $http.post("/api/login", user);
         }
 
-        function register(user){
-            var url = "/api/register";
-            return $http.post(url,user);
+        function register(user) {
+            return $http.post("/api/register", user);
         }
 
-        function createUser(user){
-            var url = "/api/user";
-            return $http.post(url,user);
+        function createUser(user) {
+            return $http.post("/api/user", user);
 
         }
-        function findUserById(userId){
-            var url = "/project/user/" + userId;
-            return $http.get(url);
+
+        function findUserById(userId) {
+            return $http.get("/project/user/" + userId);
         }
 
-        function findUserByUsername(username){
-            var url = "/project/api/user/"+username;
-            return $http.get(url);
+        function findUserByUsername(username) {
+            return $http.get("/project/api/user/" + username);
         }
 
-        function findUserByCredentials(username,password){
-            var url = "/api/user?username="+username+"&password="+password;
-            return $http.get(url);
+        function findUserByCredentials(username, password) {
+            return $http.get("/api/user?username=" + username + "&password=" + password);
         }
 
-        function updateUser(userId, newUser){
-            var url = "/project/user/" + userId;
-            return $http.put(url, newUser);
+        function updateUser(userId, newUser) {
+            return $http.put("/project/user/" + userId, newUser);
         }
 
-        function deleteUser(userId){
-            var url = "/api/user/" + userId;
-            return $http.delete(url);
+        function deleteUser(userId) {
+            return $http.delete("/api/user/" + userId);
         }
-        
-        function getUsers(){
-            var url = "/api/user";
-            return $http.get(url);
+
+        function getUsers() {
+            return $http.get("/api/user");
         }
 
     }

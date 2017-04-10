@@ -1,17 +1,12 @@
 module.exports = function (app) {
-    // var helper = require('sendgrid').mail;
-
-
-
-
 
 
     var helper = require('sendgrid').mail;
     var sg = require('sendgrid')("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");
 
-    app.post ("/api/mail", sendMail);
+    app.post("/api/mail", sendMail);
 
-    function sendMail(request,res) {
+    function sendMail(request, res) {
         var email = request.body;
         from_email = new helper.Email(email.fromMail)
         to_email = new helper.Email("aeshu08@gmail.com")
@@ -25,8 +20,8 @@ module.exports = function (app) {
         request.path = '/v3/mail/send'
         request.body = requestBody
         sg.API(request, function (response) {
-            res.send(200);
-        }, function (error){
+            res.sendStatus(200);
+        }, function (error) {
             res.statusCode(404).send(error);
         })
     }

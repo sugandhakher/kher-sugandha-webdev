@@ -4,123 +4,114 @@ module.exports = function (app, models) {
     app.post("/project/event", createEvent);
     app.get("/project/event/:eventId", findEventByEventIdFromDb);
     app.get("/project/profile/event/:id", findEventByIdFromDb);
-     /*app.put("/api/website/:websiteId", updateWebsite);
-     app.delete("/api/website/:websiteId", deleteWebsite);*/
 
-    /*function searchEvents(request,response){
-     var event = request.body;
-     var urlBase = "https://www.eventbriteapi.com/v3/events/search/?q=SEARCH_TEXT&token=2ML7YE6OJPNSP5RANX4H";
-     var url = urlBase
-     .replace("SEARCH_TEXT", event.event);
-     return $http.get(url);
-     }*/
-    function createEvent(request, response) {
-        var newEvent = request.body;
+    function createEvent(req, res) {
+        var newEvent = req.body;
         eventModel
             .findEventByEventId(newEvent.eventId)
             .then(
                 function (event) {
                     if (event) {
-                        response.json(event);
+                        res.json(event);
                     }
                     else{
                         return eventModel.createEvent(newEvent);
                     }
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
             .then(
                 function(event){
-                    response.json(event);
+                    res.json(event);
                 },
                 function(error){
-                    response.status(400).send(error);
+                    res.status(400).send(error);
                 }
             )
     }
 
-    function findEventByEventIdFromDb(request, response){
-        var eventId = request.params.eventId;
+    function findEventByEventIdFromDb(req, res){
+        var eventId = req.params.eventId;
         eventModel
             .findEventByEventId(eventId)
             .then(
                 function(event){
-                    response.json(event);
+                    res.json(event);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function findEventByIdFromDb(request,response){
-        var id = request.params.id;
+    function findEventByIdFromDb(req,res){
+        var id = req.params.id;
         eventModel
             .findEventById(id)
             .then(
                 function(event){
-                    response.json(event);
+                    res.json(event);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function findAllWebsitesForUser(request, response) {
-        var userId = request.params.userId;
+    function findAllWebsitesForUser(req, res) {
+        var userId = req.params.userId;
         websiteModel
             .findAllWebsitesForUser(userId)
             .then(
                 function (websites) {
-                    response.json(websites);
+                    res.json(websites);
                 }
             );
     }
 
-    function findWebsiteById(request, response) {
-        var websiteId = request.params.websiteId;
+    function findWebsiteById(req, res) {
+        var websiteId = req.params.websiteId;
         websiteModel
             .findWebsiteById(websiteId)
             .then(
                 function (website) {
-                    response.json(website);
+                    res.json(website);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }
 
-    function updateWebsite(request, response) {
-        var websiteId = request.params.websiteId;
-        var newWebsite = request.body;
+    function updateWebsite(req, res) {
+        var websiteId = req.params.websiteId;
+        var newWebsite = req.body;
 
         websiteModel
             .updateWebsite(websiteId, newWebsite)
             .then(
                 function (success) {
-                    response.send(200);
+                    res.send(200);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }
 
-    function deleteWebsite(request, response) {
-        var websiteId = request.params.websiteId;
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
 
         websiteModel
             .deleteWebsite(websiteId)
             .then(
                 function (success) {
-                    response.send(200);
+                    res.send(200);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }

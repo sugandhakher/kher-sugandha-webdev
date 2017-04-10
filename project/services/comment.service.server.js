@@ -5,46 +5,46 @@ module.exports = function(app,models){
     app.get("/project/comment/:eventId", findCommentByEventId);
     app.delete("/project/comment/:commentId", removeComment);
 
-    function createComment(request,response){
-        var newComment = request.body;
-        var userId = request.params.userId;
+    function createComment(req,res){
+        var newComment = req.body;
+        var userId = req.params.userId;
         commentModel
             .createComment(newComment)
             .then(
                 function(comment){
-                    response.json(comment);
+                    res.json(comment);
                 },
                 function(error){
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function findCommentByEventId(request,response){
-        var eventId = request.params.eventId;
+    function findCommentByEventId(req,res){
+        var eventId = req.params.eventId;
         commentModel
             .findCommentByEventId(eventId)
             .then(
                 function(comments){
-                    response.json(comments);
+                    res.json(comments);
                 },
                 function(error){
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }
 
-    function removeComment(request,response){
-        var commentId = request.params.commentId;
+    function removeComment(req,res){
+        var commentId = req.params.commentId;
 
         commentModel
             .removeComment(commentId)
             .then(
                 function(success){
-                    response.send(200);
+                    res.send(200);
                 },
                 function(error){
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }

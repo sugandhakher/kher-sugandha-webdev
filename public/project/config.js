@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .config(Config);
 
     function Config($routeProvider) {
@@ -39,13 +39,13 @@
             })
             .when("/user/project/profile/:username", {
                 templateUrl: "views/user/member-profile.view.client.html",
-                controller: "MemberProfileController",
+                controller: "MemberController",
                 controllerAs: "model",
                 resolve: {
                     loggedIn: checkLoggedIn
                 }
             })
-            .when("/admin",{
+            .when("/admin", {
                 templateUrl: "views/admin/admin.view.client.html",
                 controller: "AdminController",
                 controllerAs: "model",
@@ -53,26 +53,26 @@
                     loggedIn: permitEntry
                 }
             })
-        
+
     }
 
-    function permitEntry(UserService, $location, $q, $rootScope){
+    function permitEntry(UserService, $location, $q, $rootScope) {
         var deferred = $q.defer();
         UserService
             .loggedIn()
             .then(
-                function(response){
-                    var user = response.data;
-                    if(user == '0'){
+                function (res) {
+                    var user = res.data;
+                    if (user == '0') {
                         $rootScope.currentUser = null;
                         deferred.reject();
                         $location.url("/");
-                    }else{
+                    } else {
                         $rootScope.currentUser = user;
                         deferred.resolve();
                     }
                 },
-                function(error){
+                function (error) {
                     $location.url("/");
                 }
             );
@@ -84,8 +84,8 @@
         UserService
             .loggedIn()
             .then(
-                function (response) {
-                    var user = response.data;
+                function (res) {
+                    var user = res.data;
                     if (user == '0') {
                         $rootScope.currentUser = null;
                     } else {

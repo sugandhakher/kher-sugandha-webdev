@@ -1,3 +1,25 @@
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '281192055652658',
+            xfbml: true,
+            version: 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <section id="home">
     <div id="main-slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -7,28 +29,25 @@
         </ol>
         <div class="carousel-inner">
             <div class="item active">
-                <img class="img-responsive" src="../img/project-images/slider/bg_1.jpg" alt="slider">
+                <img class="img-responsive" src="../img/project-images/slider/event1.jpg" alt="slider">
                 <div class="carousel-caption">
                     <h2>Register For Events On BookMyEvent</h2>
-                    <h4>Promote, manage and host successful events</h4>
                     <a target="_blank" href="https://www.eventbrite.com/">Learn More<i
                             class="fa fa-angle-right"></i></a>
                 </div>
             </div>
             <div class="item">
-                <img class="img-responsive" src="../img/project-images/slider/bg2.jpg" alt="slider">
+                <img class="img-responsive" src="../img/project-images/slider/event2.jpg" alt="slider">
                 <div class="carousel-caption">
                     <h2>Register For Events On BookMyEvent</h2>
-                    <h4>Promote, manage and host successful events</h4>
                     <a target="_blank" href="https://www.eventbrite.com/">Learn More<i
                             class="fa fa-angle-right"></i></a>
                 </div>
             </div>
             <div class="item">
-                <img class="img-responsive" src="../img/project-images/slider/bg_2.jpg" alt="slider">
+                <img class="img-responsive" src="../img/project-images/slider/event3.jpg" alt="slider">
                 <div class="carousel-caption">
                     <h2>Register For Events On BookMyEvent</h2>
-                    <h4>Promote, manage and host successful events</h4>
                     <a target="_blank" href="https://www.eventbrite.com/">Learn More <i
                             class="fa fa-angle-right"></i></a>
                 </div>
@@ -39,10 +58,10 @@
 <!--/#home-->
 
 <section id="explore">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="watch">
-                <img class="img-responsive" src="../img/project-images/watch.png" alt="">
+                <img class="img-responsive" src="../img/project-images/logo.png" alt="">
             </div>
             <div class="col-md-4 col-md-offset-2 col-sm-5">
                 <h2>Search For Events</h2>
@@ -89,10 +108,10 @@
             </div>
         </div>
     </div>
-</section><!--/#explore-->
+</section>
 
 <section id="event">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-9">
                 <div id="event-carousel" class="carousel slide" data-interval="false">
@@ -103,7 +122,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event1.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/jared.jpg"
                                              alt="event-image">
                                         <h4>Jared Leto</h4>
                                         <h5>Lead Vocal</h5>
@@ -111,7 +130,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event2.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/shannon.jpg"
                                              alt="event-image">
                                         <h4>Shannon Leto</h4>
                                         <h5>Drums</h5>
@@ -119,7 +138,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event3.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/tomo.jpg"
                                              alt="event-image">
                                         <h4>Tomo Miličević</h4>
                                         <h5>Bass Guitar, Violen</h5>
@@ -131,7 +150,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event1.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/jared.jpg"
                                              alt="event-image">
                                         <h4>Jared Leto</h4>
                                         <h5>Lead Vocal</h5>
@@ -139,7 +158,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event2.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/shannon.jpg"
                                              alt="event-image">
                                         <h4>Shannon Leto</h4>
                                         <h5>Drums</h5>
@@ -147,7 +166,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="single-event">
-                                        <img class="img-responsive" src="../img/project-images/event/event3.jpg"
+                                        <img class="img-responsive" src="../img/project-images/event/tomo.jpg"
                                              alt="event-image">
                                         <h4>Tomo Miličević </h4>
                                         <h5>Bass Guitar, Violen</h5>
@@ -159,15 +178,15 @@
                 </div>
             </div>
             <div class="guitar">
-                <img class="img-responsive" src="../img/project-images/guitar.png" alt="guitar">
+                <img class="img-responsive" src="../img/project-images/hp.png">
             </div>
         </div>
     </div>
-</section><!--/#event-->
+</section>
 
 <section id="about">
 
-    <div class="about-content">
+    <div class="about-content pull-right">
         <h2>About BookMyEvent</h2>
         <p>BookMyEvent is the technology platform. We build the technology to allow anyone to create,
             share, find and attend new things to do that fuel their passions and enrich their lives. Music festivals,
@@ -179,7 +198,7 @@
 
 <div ng-if="!currentUser">
     <section id="login">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <h2>Login Here</h2>
@@ -223,9 +242,10 @@
                                     class="btn btn-primary btn-block">
                                 Login
                             </button>
-                            <a href="/auth/google" class="btn btn-danger btn-block">
-                                <i class="fa fa-google"></i>
-                                Login with Google
+                            </a>
+                            <a href="/auth/facebook" class="btn btn-primary btn-block">
+                                <span class="fa fa-facebook-official"></span>
+                                Facebook
                             </a>
                         </div>
                     </form>
@@ -322,9 +342,9 @@
 <section id="contact">
     <div class="contact-section">
         <div class="ear-piece">
-            <img class="img-responsive" src="../img/project-images/ear-piece.png" alt="">
+            <img class="img-responsive" src="../img/project-images/contact.png" alt="">
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-sm-offset-4">
                     <div class="contact-text">
@@ -334,49 +354,43 @@
                             Phone: +1 (857) 654 4574<br>
                         </address>
                     </div>
-                    <div class="contact-address">
-                        <h3>Address</h3>
-                        <address>
-                            Northeastern University<br>
-                            370 Huntington Avenue,<br>
-                            Boston, MA 02120<br>
-                            USA
-                        </address>
-                    </div>
+
                 </div>
                 <div id="contact-section">
                     <h3>Send a message</h3>
                     <div class="col-sm-5">
                         <div ng-if="model.messageSuccess" class="alert alert-success alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                             <strong>Success!!! </strong> {{model.messageSuccess}}
                         </div>
 
                         <div ng-if="model.messageError" class="alert alert-danger alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
                             <strong>Error!!! </strong> {{model.messageError}}
                         </div>
-                    <form id="main-contact-form"
-                          class="contact-form"
-                          name="contactForm"
-                          novalidate>
-                        <div class="form-group">
-                            <input type="text"
-                                   name="name"
-                                   ng-model="model.email.username"
-                                   class="form-control"
-                                   required data-validation-required-message="Please enter your name."
-                                   placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email"
-                                   name="email"
-                                   ng-model="model.email.fromMail"
-                                   class="form-control"
-                                   required data-validation-required-message="Please enter your email address."
-                                   placeholder="Email ID">
-                        </div>
-                        <div class="form-group">
+                        <form id="main-contact-form"
+                              class="contact-form"
+                              name="contactForm"
+                              novalidate>
+                            <div class="form-group">
+                                <input type="text"
+                                       name="name"
+                                       ng-model="model.email.username"
+                                       class="form-control"
+                                       required data-validation-required-message="Please enter your name."
+                                       placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email"
+                                       name="email"
+                                       ng-model="model.email.fromMail"
+                                       class="form-control"
+                                       required data-validation-required-message="Please enter your email address."
+                                       placeholder="Email ID">
+                            </div>
+                            <div class="form-group">
                                 <textarea name="message"
                                           id="message"
                                           required="required"
@@ -385,17 +399,17 @@
                                           rows="4"
                                           required data-validation-required-message="Please enter a message."
                                           placeholder="Enter your message"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit"
-                                    ng-click="model.sendMail(model.email,contactForm)"
-                                    class="btn btn-primary pull-right">Send
-                            </button>
-                        </div>
-                    </form>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit"
+                                        ng-click="model.sendMail(model.email,contactForm)"
+                                        class="btn btn-primary pull-right">Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </section>

@@ -1,9 +1,9 @@
 (function () {
     angular
-        .module("EventSmart")
-        .controller("MemberProfileController", MemberProfileController);
+        .module("BookMyEvent")
+        .controller("MemberController", MemberController);
 
-    function MemberProfileController(EventService, UserService, $route, $routeParams, $location, $rootScope, MemberProfileService, $anchorScroll) {
+    function MemberController(EventService, UserService, $route, $routeParams, $location, $rootScope, MemberProfileService, $anchorScroll) {
         var vm = this;
         vm.eventByCategory = eventByCategory;
         vm.loggedInUser = $rootScope.currentUser;
@@ -67,7 +67,6 @@
                     }
                 );
 
-            // Getting followers for a visted profile
             MemberProfileService.findAllUsers()
                 .then(
                     function (response) {
@@ -118,7 +117,7 @@
             if (logo) {
                 return logo.url;
             } else {
-                return "../../../img/project-images/ear-piece.png";
+                return "../../../img/project-images/contact.png";
             }
         }
 

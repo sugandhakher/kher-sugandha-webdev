@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .controller("HomePageController", HomePageController);
 
     function HomePageController($location, $anchorScroll, UserService, $rootScope, $route, $http) {
@@ -28,9 +28,7 @@
             }
         }
 
-        /*
-         Handles the login in the controller
-         */
+
         function login(username, password, LoginForm) {
             vm.LoginSuccess = null;
             vm.LoginError = null;
@@ -57,9 +55,7 @@
             }
         }
 
-        /*
-         Handles the registration of a particular user in the controller
-         */
+
         function register(username, password, email, RegisterForm) {
             vm.RegisterSuccess = null;
             vm.RegisterError = null;

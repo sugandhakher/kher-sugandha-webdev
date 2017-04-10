@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .controller("EventDetailController", EventDetailController);
 
     function EventDetailController(EventService, $routeParams, $sce, $location, $rootScope, $route, CommentService, UserService) {
@@ -16,8 +16,8 @@
         vm.visitProfile = visitProfile;
 
         function init() {
-            vm.comments=[];
-            if(vm.user)
+            vm.comments = [];
+            if (vm.user)
                 isEventSavedbyUser();
 
             EventService.getCategories()
@@ -99,7 +99,7 @@
             CommentService.removeComment(commentId)
                 .then(
                     function (success) {
-                       init();
+                        init();
                     },
                     function (error) {
                         init();
@@ -116,7 +116,7 @@
             $location.url("/event/" + category + "/location/boston")
         }
 
-        function createComment(commentText,commentForm) {
+        function createComment(commentText, commentForm) {
             $("#commentText").val('');
             if (commentForm.$valid) {
                 var comment = {

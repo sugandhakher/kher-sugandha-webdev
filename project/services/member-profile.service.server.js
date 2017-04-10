@@ -7,73 +7,73 @@ module.exports = function (app, models) {
     app.get("/project/follow/users", findAllUsers);
     app.delete("/api/website/:websiteId", deleteWebsite);
 
-    function createUser(request, response) {
-        var newUser = request.body;
+    function createUser(req, res) {
+        var newUser = req.body;
         followModel
             .createUser(newUser)
             .then(
                 function (user) {
-                    response.json(user);
+                    res.json(user);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function findUserByUsername(request, response) {
-        var username = request.params.username;
+    function findUserByUsername(req, res) {
+        var username = req.params.username;
         followModel
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    response.json(user);
+                    res.json(user);
                 },
                 function (error) {
-                    response.send(error);
+                    res.send(error);
                 }
             )
     }
 
-    function updateUser(request, response) {
-        var userId = request.params.userId;
-        var newUser = request.body;
+    function updateUser(req, res) {
+        var userId = req.params.userId;
+        var newUser = req.body;
 
         followModel
             .updateUser(userId, newUser)
             .then(
                 function (success) {
-                    response.send(200);
+                    res.send(200);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }
 
-    function findAllUsers(request, response) {
+    function findAllUsers(req, res) {
         followModel.findAllUsers()
             .then(
                 function (users) {
-                    response.send(users);
+                    res.send(users);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function deleteWebsite(request, response) {
-        var websiteId = request.params.websiteId;
+    function deleteWebsite(req, res) {
+        var websiteId = req.params.websiteId;
 
         websiteModel
             .deleteWebsite(websiteId)
             .then(
                 function (success) {
-                    response.send(200);
+                    res.send(200);
                 },
                 function (error) {
-                    response.statusCode(404).send(error);
+                    res.statusCode(404).send(error);
                 }
             )
     }

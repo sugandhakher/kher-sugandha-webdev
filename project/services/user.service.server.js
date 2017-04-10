@@ -1,63 +1,86 @@
-//var passport = require('passport');
-//var LocalStrategy = require('passport-local').Strategy;
-//var FacebookStrategy = require('passport-facebook').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-// var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
-var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname+'/../../public/img-upload' });
+var multer = require('multer');
+var upload = multer({dest: __dirname + '/../../public/img-upload'});
 
-module.exports = function (app,models) {
+module.exports = function (app, models) {
 
     var userModel = models.userModel;
 
-    app.post ("/profile/uploads", upload.single('myFile'), uploadImage);
-    app.get("/project/api/user/:username",findUserByUsername);
-    app.post("/api/user",createUser);
+    app.post("/profile/uploads", upload.single('myFile'), uploadImage);
+    app.get("/project/api/user/:username", findUserByUsername);
+    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
-    app.post("/api/login",passport.authenticate('project'), login);
-    app.get("/project/user/:userId",findUserById);
-    app.put("/project/user/:userId",updateUser);
-    app.delete("/api/user/:userId",deleteUser);
-    app.post("/api/logout",logout);
+    app.post("/api/login", passport.authenticate('project'), login);
+    app.get("/project/user/:userId", findUserById);
+    app.put("/project/user/:userId", updateUser);
+    app.delete("/api/user/:userId", deleteUser);
+    app.post("/api/logout", logout);
     app.get("/api/loggedIn", loggedIn);
     app.post("/api/register", register);
 
-   //  app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-   //  app.get('/auth/google/callback',
-   //      passport.authenticate('google', {
-   //          successRedirect: '/project/#/',
-   //          failureRedirect: '/project/#/login'
-   //      }));
-   //
-   // var googleConfig = {
-   //      clientID     : process.env.GOOGLE_CLIENT_ID,
-   //      clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-   //      callbackURL  : process.env.GOOGLE_CALLBACK_URL
-   //  };
+    app.get("/auth/facebook", passport.authenticate('facebook'));
+    app.get("/auth/facebook/callback", passport.authenticate('facebook', {
+        successRedirect: '/assignment/#/user',
+        failureRedirect: '/assignment/#/login'
+    }));
+    var facebookConfig = {
+        clientID: "281192055652658", //process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: "e15f9cc33687f647036afde07d30b6d0", //process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: "http://localhost:2900/project/#/", //process.env.FACEBOOK_CALLBACK_URL
+    };
+
 
     passport.use('project', new LocalStrategy(projectLocalStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
-    // passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-
+    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    function facebookLogin(token, refreshToken, profile, done) {
+        userModel
+            .findFacebookUser(profile.id)
+            .then(
+                function (facebookUser) {
+                    if (facebookUser) {
+                        return done(null, facebookUser);
+                    } else {
+                        facebookUser = {
+                            username: profile.displayName.replace(/ /g, ''),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName
+                            }
+                        }
+                    }
+                    userModel.createUser(facebookUser)
+                        .then(
+                            function (user) {
+                                done(null, user);
+                            }
+                        );
+                }
+            )
+    }
 
     function projectLocalStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
             .then(
-                function(user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
+                function (user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     }
                     else {
                         return done(null, false);
                     }
                 },
-                function(err) {
-                    if (err) { return done(err); }
+                function (err) {
+                    if (err) {
+                        return done(err);
+                    }
                 }
             );
     }
@@ -67,7 +90,7 @@ module.exports = function (app,models) {
     }
 
     function deserializeUser(user, done) {
-        if(user.type === "member") {
+        if (user.type === "member") {
             userModel
                 .findUserById(user._id)
                 .then(
@@ -92,268 +115,234 @@ module.exports = function (app,models) {
         }
     }
 
-    function googleStrategy(token, refreshToken, profile, done) {
-        userModel
-            .findUserByGoogleId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
-                            google: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return userModel.createUser(newGoogleUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
 
     function localStrategy(username, password, done) {
         userModel
             .findUserByUsername(username)
             .then(
-                function(user) {
-                    if(user && bcrypt.compareSync(password, user.password)) {
+                function (user) {
+                    if (user && bcrypt.compareSync(password, user.password)) {
                         done(null, user);
                     } else {
                         done(null, false);
                     }
                 },
-                function(err) {
-                    if (err) { done(err); }
+                function (err) {
+                    if (err) {
+                        done(err);
+                    }
                 }
             );
     }
 
 
-    function loggedIn(request, response){
-        if(request.isAuthenticated()){
-            response.send(request.user);
-        }else{
-            response.send('0');
+    function loggedIn(req, res) {
+        if (req.isAuthenticated()) {
+            res.send(req.user);
+        } else {
+            res.send('0');
         }
     }
 
-    function logout(request, response){
-        request.logout();
-        response.send(200);
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200);
     }
 
-    function login(request, response) {
-        var user = request.user;
-        response.json(user);
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
     }
 
-    function register(request, response){
-        var user = request.body;
+    function register(req, res) {
+        var user = req.body;
         userModel
             .findUserByUsername(user.username)
             .then(
-                function(user){
-                    if(user){
-                        response.status(400).send("Username already in use");
-                    }else{
-                        request.body.password = bcrypt.hashSync(request.body.password);
+                function (user) {
+                    if (user) {
+                        res.status(400).send("Username already in use");
+                    } else {
+                        req.body.password = bcrypt.hashSync(req.body.password);
                         return userModel
-                                .createUser(request.body);
+                            .createUser(req.body);
                     }
                 },
-                function(error){
-                    response.status(400).send(error);
+                function (error) {
+                    res.status(400).send(error);
                 }
             )
             .then(
-                function(user){
-                    if(user){
-                        request.login(user, function(error){
-                            if(error){
-                                response.status(400).send(error);
-                            }else{
-                                response.json(user);
+                function (user) {
+                    if (user) {
+                        req.login(user, function (error) {
+                            if (error) {
+                                res.status(400).send(error);
+                            } else {
+                                res.json(user);
                             }
                         })
                     }
                 },
-                function(error){
-                    response.status(400).send(error);
+                function (error) {
+                    res.status(400).send(error);
                 }
             );
     }
 
-    function createUser(request,response){
-        var user = request.body;
+    function createUser(req, res) {
+        var user = req.body;
         userModel
             .findUserByUsername(user.username)
             .then(
-                function(user){
-                    if(user){
-                        response.status(400).send("Username already in use");
-                    }else{
-                        request.body.password = bcrypt.hashSync(request.body.password);
+                function (user) {
+                    if (user) {
+                        res.status(400).send("Username already in use");
+                    } else {
+                        req.body.password = bcrypt.hashSync(req.body.password);
                         userModel
-                            .createUser(request.body)
+                            .createUser(req.body)
                             .then(
-                                function(user){
-                                    response.json(user);
+                                function (user) {
+                                    res.json(user);
                                 },
-                                function(error){
-                                    response.statusCode(400).send(error);
+                                function (error) {
+                                    res.statusCode(400).send(error);
                                 }
                             );
                     }
                 },
-                function(error){
-                    response.status(400).send(error);
+                function (error) {
+                    res.status(400).send(error);
                 }
             )
     }
 
-    function findUserByUsername(request,response){
-        var username = request.params.username;
+    function findUserByUsername(req, res) {
+        var username = req.params.username;
         userModel
             .findUserByUsername(username)
             .then(
-                function(user){
-                    response.json(user);
+                function (user) {
+                    res.json(user);
                 },
-                function(error){
-                    response.statusCode(404).send(error);
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             )
     }
 
-    function getUsers(request,response){
-        var username = request.query['username'];
-        var password = request.query['password'];
+    function getUsers(req, res) {
+        var username = req.query['username'];
+        var password = req.query['password'];
 
-        if(username && password){
-            findUserByCredentials(username,password,response);
-        }else if(username){
-            findUserByUsername(username,response);
-        }else{
-            findAllUsers(request, response);
+        if (username && password) {
+            findUserByCredentials(username, password, res);
+        } else if (username) {
+            findUserByUsername(username, res);
+        } else {
+            findAllUsers(req, res);
         }
     }
 
-    function findAllUsers(request, response){
+    function findAllUsers(req, res) {
         userModel
             .findAllUsers()
             .then(
-                function(users){
-                    response.json(users);
+                function (users) {
+                    res.json(users);
                 },
-                function(error){
-                    response.statusCode(404).send({});
+                function (error) {
+                    res.statusCode(404).send({});
                 }
             )
     }
 
-    function findUserByCredentials(username,password,response){
+    function findUserByCredentials(username, password, res) {
         userModel
-            .findUserByCredentials(username,password)
+            .findUserByCredentials(username, password)
             .then(
                 function (user) {
-                    response.json(user);
+                    res.json(user);
                 },
-                function(error){
-                    response.statusCode(404).send({});
+                function (error) {
+                    res.statusCode(404).send({});
                 }
             )
     }
 
-    function findUserById(request,response){
-        var id = request.params.userId;
+    function findUserById(req, res) {
+        var id = req.params.userId;
         userModel
             .findUserById(id)
             .then(
-                function(user){
-                    response.send(user);
+                function (user) {
+                    res.send(user);
                 },
-                function(error){
-                    response.statusCode(404).send(error);
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function updateUser(request,response){
-        var id = request.params.userId;
-        var newUser = request.body;
+    function updateUser(req, res) {
+        var id = req.params.userId;
+        var newUser = req.body;
         userModel
-            .updateUser(id,newUser)
+            .updateUser(id, newUser)
             .then(
-                function(stats){
-                    response.send(200);
+                function (stats) {
+                    res.sendStatus(200);
                 },
-                function(error){
-                    response.statusCode(404).send(error);
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function deleteUser(request,response){
-        var id = request.params.userId;
+    function deleteUser(req, res) {
+        var id = req.params.userId;
         userModel
             .deleteUser(id)
             .then(
-                function(stats){
-                    response.send(200);
+                function (stats) {
+                    res.send(200);
                 },
-                function(error){
-                    response.statusCode(404).send(error);
+                function (error) {
+                    res.statusCode(404).send(error);
                 }
             );
     }
 
-    function uploadImage(request, response) {
-        
-        var userId        = request.body.userId;
-        var myFile        = request.file;
+    function uploadImage(req, res) {
 
-        if(myFile) {
-            var originalname = myFile.originalname; // file name on user's computer
-            var filename = myFile.filename;     // new file name in upload folder
-            var path = myFile.path;         // full path of uploaded file
-            var destination = myFile.destination;  // folder where file is saved to
+        var userId = req.body.userId;
+        var myFile = req.file;
+
+        if (myFile) {
+            var originalname = myFile.originalname;
+            var filename = myFile.filename;
+            var path = myFile.path;
+            var destination = myFile.destination;
             var size = myFile.size;
             var mimetype = myFile.mimetype;
 
             var user = {
-                url : "/img-upload/" + filename
+                url: "/img-upload/" + filename
             };
             userModel
-                .updateUser(userId,user)
+                .updateUser(userId, user)
                 .then(
-                    function(success){
-                        response.send(200);
+                    function (success) {
+                        res.sendStatus(200);
                     },
-                    function(error){
-                        response.statusCode(404).send(error);
+                    function (error) {
+                        res.statusCode(404).send(error);
                     }
                 );
-            response.redirect("/project/#/user/profile");
-        }else{
-            response.redirect("/project/#/user/profile");
+            res.redirect("/project/#/user/profile");
+        } else {
+            res.redirect("/project/#/user/profile");
         }
     }
 };

@@ -1,10 +1,10 @@
 "use strict";
 (function () {
     angular
-        .module("EventSmart")
+        .module("BookMyEvent")
         .controller("AdminController", AdminController);
 
-    function AdminController(UserService,$rootScope) {
+    function AdminController(UserService, $rootScope) {
         var vm = this;
         vm.user = $rootScope.currentUser;
         vm.select = select;
@@ -60,14 +60,14 @@
                 .then(callSuccess, callError);
         }
 
-        function callSuccess(response){
+        function callSuccess(response) {
             vm.users = response.data;
             vm.inputUser = {};
             vm.selected = -1;
             init();
         }
 
-        function callError(error){
+        function callError(error) {
             vm.error = error.data;
         }
 

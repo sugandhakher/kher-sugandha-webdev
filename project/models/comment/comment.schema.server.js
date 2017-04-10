@@ -8,6 +8,6 @@ module.exports = function () {
         eventId: String,
         dateCreated: {type: Date, default: Date.now},
     }, {collection: "project.comment"});
-    
+
     return CommentSchema;
 };
