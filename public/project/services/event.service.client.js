@@ -3,8 +3,6 @@
         .module("BookMyEvent")
         .factory("EventService", EventService);
 
-    var token = "3P3RTUFC5AY5KH7AZEYX";
-    var secret = "WQSBG4CIKGPA6IWMRVDM7EHZS2AOF4AKFJBZBIXRGIIHK5CFP4";
 
     function EventService($http) {
         var api = {
@@ -17,6 +15,9 @@
 
         };
         return api;
+        var token = "3P3RTUFC5AY5KH7AZEYX";
+        var secret = "WQSBG4CIKGPA6IWMRVDM7EHZS2AOF4AKFJBZBIXRGIIHK5CFP4";
+
 
         function createEvent(event) {
             return $http.post("/project/event", event);

@@ -17,13 +17,17 @@
             vm.selected = -1;
             UserService
                 .getUsers()
+                // .login({username: "admin", password : "admin"})
                 .then(
                     function (response) {
+                        console.log("I am here");
                         vm.users = response.data;
+                        console.log(response.data);
                         vm.inputUser = {};
                         vm.selected = -1;
                     },
                     function (error) {
+                        console.log("Errror");
                         vm.error = error;
                     });
         }

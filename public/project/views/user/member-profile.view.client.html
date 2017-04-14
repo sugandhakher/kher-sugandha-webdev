@@ -14,7 +14,7 @@
             </div>
             <div class="useravatar">
                 <img ng-if="model.visitedUser.url" alt="" ng-src="{{model.visitedUser.url}}">
-                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/project-images/user.png">
+                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/project-images/userlogo.png">
             </div>
             <div class="card-info"><span class="card-title">{{model.visitedUser.username}}</span>
 
@@ -158,7 +158,7 @@
                             <div class="profile-header-img member-profile">
                                 <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
                                 <img ng-if="!user.url" class="img-circle"
-                                     ng-src="../../../img/project-images/user.png"/>
+                                     ng-src="../../../img/project-images/userlogo.png"/>
                                 <a class="" href="#/user/project/profile/{{user.username}}"><h3 style="text-transform: none">{{user.username}}</h3></a>
                             </div>
                         </div>
