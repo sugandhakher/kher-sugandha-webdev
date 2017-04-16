@@ -7,7 +7,6 @@
         var vm = this;
         vm.eventByCategory = eventByCategory;
         vm.loggedInUser = $rootScope.currentUser;
-        vm.getSafeImageUrl = getSafeImageUrl;
         vm.username = $routeParams.username;
         vm.followUser = followUser;
         vm.unFollowUser = unFollowUser;
@@ -113,13 +112,6 @@
 
         }
 
-        function getSafeImageUrl(logo) {
-            if (logo) {
-                return logo.url;
-            } else {
-                return "../../../img/project-images/contact.png";
-            }
-        }
 
         function eventByCategory(category) {
             category = category.replace('&', "and");

@@ -7,7 +7,6 @@
         var vm = this;
         vm.event = $routeParams.eventName;
         vm.location = $routeParams.location;
-        vm.getSafeImageUrl = getSafeImageUrl;
         vm.eventByCategory = eventByCategory;
 
         function init() {
@@ -35,13 +34,6 @@
 
         init();
 
-        function getSafeImageUrl(logo) {
-            if (logo) {
-                return logo.url;
-            } else {
-                return "../../../img/project-images/contact.png";
-            }
-        }
 
         function eventByCategory(category) {
             vm.event = category.replace('&', "and");

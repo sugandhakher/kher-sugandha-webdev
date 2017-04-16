@@ -37,7 +37,5 @@ var port = process.env.PORT || 2900;
 var project = require("./project/app.js");
 project(app);
 
-var home = require("./home/app.js");
-home(app);
 
 app.listen(port);
