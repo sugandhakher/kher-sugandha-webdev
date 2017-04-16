@@ -3,25 +3,25 @@
         .module("BookMyEvent")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($rootScope,UserService) {
+    function ProfileController($rootScope, UserService) {
         var vm = this;
         vm.user = $rootScope.currentUser;
         vm.updateUser = updateUser;
         vm.getProfileImage = getProfileImage;
-        
-        function init(){
+
+        function init() {
             UserService
                 .findUserById(vm.user._id)
                 .then(
-                    function(response){
+                    function (response) {
                         vm.user = response.data;
                     });
         }
 
-        function getProfileImage(){
-            if(vm.user.url){
+        function getProfileImage() {
+            if (vm.user.url) {
                 return vm.user.url;
-            }else{
+            } else {
                 return "../../../img/images/userlogo.png";
             }
         }

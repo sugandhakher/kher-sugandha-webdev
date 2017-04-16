@@ -3,7 +3,11 @@
         .module("BookMyEvent")
         .config(Config);
 
-    function Config($routeProvider) {
+    function Config($routeProvider, $httpProvider) {
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+        $httpProvider.defaults.headers.put['Content-Type'] = 'application/json;charset=utf-8';
+
+
         $routeProvider
             .when("/", {
                 templateUrl: "views/home/home.view.client.html",

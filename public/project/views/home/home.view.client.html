@@ -74,13 +74,14 @@
                 <form name="SearchEventForm" novalidate>
                     <div class="row">
                         <div class="col-md-6">
+                            <label for="location">Enter the Location</label>
                             <input name=location
                                    id="location"
                                    type="text"
                                    ng-model="location"
                                    class="form-control col-md-6"
                                    required
-                                   placeholder="Enter Location"/>
+                                   placeholder="Location"/>
                             <div ng-show="SearchEventForm.location.$invalid && SearchEventForm.$submitted">
                             <span class="error">
                                 Please enter a location!!
@@ -88,13 +89,14 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <label for="eventname">Event You Are Looking</label>
                             <input name="eventname"
                                    id="eventname"
                                    type="text"
                                    ng-model="event"
                                    required
                                    class="form-control col-md-6"
-                                   placeholder="Event to search"/>
+                                   placeholder="Event"/>
                             <div ng-show="SearchEventForm.eventname.$invalid && SearchEventForm.$submitted">
                             <span class="error">
                                   Please enter an event!!
@@ -113,8 +115,6 @@
         </div>
     </div>
 </section>
-
-
 
 
 <div ng-if="!currentUser">

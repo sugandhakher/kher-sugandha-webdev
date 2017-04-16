@@ -14,7 +14,7 @@
             </div>
             <div class="useravatar">
                 <img ng-if="model.visitedUser.url" alt="" ng-src="{{model.visitedUser.url}}">
-                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/project-images/userlogo.png">
+                <img ng-if="!model.visitedUser.url" alt="" ng-src="../../../img/images/userlogo.png">
             </div>
             <div class="card-info"><span class="card-title">{{model.visitedUser.username}}</span>
 
@@ -39,7 +39,7 @@
                  class="card-info">
                 <span class="card-title">
                     <a ng-click="model.unFollowUser()"
-                        class="btn btn-danger btn-default">
+                       class="btn btn-danger btn-default">
                         <span class="glyphicon glyphicon-user"></span> UnFollow</a>
                 </span>
             </div>
@@ -56,7 +56,8 @@
             <div ng-if="model.loggedInUser" class="btn-group" role="group">
                 <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span
                         class="fa fa-heart" aria-hidden="true"></span>
-                    <div class="hidden-xs">Events Liked <span class="badge">{{model.visitedUserEvents.length}}</span> </div>
+                    <div class="hidden-xs">Events Liked <span class="badge">{{model.visitedUserEvents.length}}</span>
+                    </div>
                 </button>
             </div>
             <div ng-if="model.loggedInUser" class="btn-group" role="group">
@@ -65,7 +66,7 @@
                         href="#tab3"
                         data-toggle="tab">
                     <span class="fa fa-users" aria-hidden="true"></span>
-                    <div class="hidden-xs">Following <span class="badge">{{model.following.length}}</span> </div>
+                    <div class="hidden-xs">Following <span class="badge">{{model.following.length}}</span></div>
                 </button>
             </div>
             <div ng-if="model.loggedInUser" class="btn-group" role="group">
@@ -74,7 +75,7 @@
                         href="#tab4"
                         data-toggle="tab">
                     <span class="fa fa-users" aria-hidden="true"></span>
-                    <div class="hidden-xs">Followers <span class="badge">{{model.followers.length}}</span> </div>
+                    <div class="hidden-xs">Followers <span class="badge">{{model.followers.length}}</span></div>
                 </button>
             </div>
         </div>
@@ -83,40 +84,40 @@
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="tab1">
                     <div class="row">
-                    <div class=" col-md-9 col-lg-9 ">
-                        <table class="table table-user-information">
-                            <tbody>
-                            <tr>
-                                <td>FirstName:</td>
-                                <td>{{model.visitedUser.firstName}}</td>
-                            </tr>
-                            <tr>
-                                <td>LastName:</td>
-                                <td>{{model.visitedUser.lastName}}</td>
-                            </tr>
-                            <tr>
-                                <td>Email Id</td>
-                                <td>{{model.visitedUser.email}}</td>
-                            </tr>
-                            <tr>
-                                <td>Employment Status</td>
-                                <td>{{model.visitedUser.employed}}</td>
-                            </tr>
-                            <tr>
-                                <td>Company Name</td>
-                                <td>{{model.visitedUser.company}}</td>
-                            </tr>
-                            <tr>
-                                <td>About Myself</td>
-                                <td><p>{{model.visitedUser.description}}</p></td>
-                            </tr>
+                        <div class=" col-md-9 col-lg-9 ">
+                            <table class="table table-user-information">
+                                <tbody>
+                                <tr>
+                                    <td>FirstName:</td>
+                                    <td>{{model.visitedUser.firstName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>LastName:</td>
+                                    <td>{{model.visitedUser.lastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email Id</td>
+                                    <td>{{model.visitedUser.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Employment Status</td>
+                                    <td>{{model.visitedUser.employed}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Company Name</td>
+                                    <td>{{model.visitedUser.company}}</td>
+                                </tr>
+                                <tr>
+                                    <td>About Me</td>
+                                    <td><p>{{model.visitedUser.description}}</p></td>
+                                </tr>
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
 
-                    </div>
                         </div>
                     </div>
+                </div>
                 <div class="tab-pane fade in" id="tab2">
                     <div class="row">
                         <div class="col-xs-6 col-sm-4 col-lg-4 col-md-4" ng-repeat="event in model.visitedUserEvents">
@@ -139,7 +140,8 @@
                                 <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
                                 <img ng-if="!user.url" class="img-circle"
                                      ng-src="../../../img/project-images/userlogo.png"/>
-                                <a class="member-profile" href="#/user/project/profile/{{user.username}}"><h3 style="text-transform: none">{{user.username}}</h3></a>
+                                <a class="member-profile" href="#/user/project/profile/{{user.username}}"><h3
+                                        style="text-transform: none">{{user.username}}</h3></a>
                             </div>
                         </div>
                     </div>
@@ -151,7 +153,8 @@
                                 <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
                                 <img ng-if="!user.url" class="img-circle"
                                      ng-src="../../../img/images/userlogo.png"/>
-                                <a class="" href="#/user/project/profile/{{user.username}}"><h3 style="text-transform: none">{{user.username}}</h3></a>
+                                <a class="member-profile" href="#/user/project/profile/{{user.username}}"><h3
+                                        style="text-transform: none">{{user.username}}</h3></a>
                             </div>
                         </div>
                     </div>

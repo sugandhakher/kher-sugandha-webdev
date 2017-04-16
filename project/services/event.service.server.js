@@ -14,7 +14,7 @@ module.exports = function (app, models) {
                     if (event) {
                         res.json(event);
                     }
-                    else{
+                    else {
                         return eventModel.createEvent(newEvent);
                     }
                 },
@@ -23,21 +23,21 @@ module.exports = function (app, models) {
                 }
             )
             .then(
-                function(event){
+                function (event) {
                     res.json(event);
                 },
-                function(error){
+                function (error) {
                     res.status(400).send(error);
                 }
             )
     }
 
-    function findEventByEventIdFromDb(req, res){
+    function findEventByEventIdFromDb(req, res) {
         var eventId = req.params.eventId;
         eventModel
             .findEventByEventId(eventId)
             .then(
-                function(event){
+                function (event) {
                     res.json(event);
                 },
                 function (error) {
@@ -46,12 +46,12 @@ module.exports = function (app, models) {
             );
     }
 
-    function findEventByIdFromDb(req,res){
+    function findEventByIdFromDb(req, res) {
         var id = req.params.id;
         eventModel
             .findEventById(id)
             .then(
-                function(event){
+                function (event) {
                     res.json(event);
                 },
                 function (error) {

@@ -1,11 +1,10 @@
-
 (function () {
     angular
         .module("BookMyEvent", ["ngRoute", "ngRating"])
-        .controller("IndexController", IndexController);
+        .controller("EventController", EventController);
 
 
-    function IndexController($location, $anchorScroll, UserService, $route, $rootScope) {
+    function EventController($location, $anchorScroll, UserService, $route, $rootScope) {
         var vm = this;
         vm.scrollTo = scrollTo;
         vm.logout = logout;
