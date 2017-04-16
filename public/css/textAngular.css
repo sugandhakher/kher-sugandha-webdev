@@ -11,7 +11,6 @@
 	overflow: hidden;
 }
 
-/* add generic styling for the editor */
 .ta-root.focussed > .ta-scroll-window.form-control {
 	border-color: #66afe9;
 	outline: 0;

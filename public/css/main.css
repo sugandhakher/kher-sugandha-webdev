@@ -394,7 +394,7 @@ h2 {
 **************************/
 #event {
   background-color: #33888F;
-  background-image: url("../img/project-images/man.jpg");
+  background-image: url("../img/images/man.jpg");
   background-position: 50% 0;
   background-size: contain;
   position: relative;
@@ -467,7 +467,7 @@ h2 {
   position: relative;
   width: 100%;
   display: flex;
-  background-image: url("../img/project-images/classyguitar.jpg");
+  background-image: url("../img/images/classyguitar.jpg");
 }
 
 .guitar2 {
@@ -661,7 +661,7 @@ h2 {
 
 #footer {
   background-color: #212121;
-  background-image: url("../img/project-images/foot.jpg");
+  background-image: url("../img/images/foot.jpg");
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;

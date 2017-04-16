@@ -40,33 +40,7 @@
                    id="lastName"
                    placeholder="Smith">
         </div>
-        <div class="form-group">
-            <label for="dateofbirth">Date Of Birth</label>
-            <input ng-model="model.user.date"
-                   type="text"
-                   class="form-control"
-                   id="dateofbirth"
-                   placeholder="DOB">
-        </div>
-        <div class="form-group">
-            <label for="employed">Employment Status</label>
-            <select ng-model="model.user.employed"
-                    class="form-control"
-                    id="employed">
-                <option value="" selected disabled>Select Employment Status</option>
-                <option value="Student">Student</option>
-                <option value="Self-Employed">Self-Employed</option>
-                <option value="Service">Service</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="company">Company Name</label>
-            <input ng-model="model.user.company"
-                   type="text"
-                   class="form-control"
-                   id="company"
-                   placeholder="Company Name">
-        </div>
+
         <div class="form-group">
             <label for="facebooklink">Facebook Link</label>
             <input ng-model="model.user.facebooklink"
@@ -91,7 +65,7 @@
                       id="description"></textarea>
         </div>
 
-        <a class="btn btn-primary btn-block" ng-click="model.updateUser(model.user)">UpdateInfo</a>
+        <a class="btn btn-primary btn-block" ng-click="model.updateUser(model.user)">Update Profile</a>
     </form>
 
     </div>
@@ -100,7 +74,7 @@
             <div class="profile-header-container">
                 <div class="profile-header-img">
                         <img ng-if="model.user.url" class="img-circle" ng-src="{{model.user.url}}" />
-                        <img ng-if="!model.user.url" class="img-circle" ng-src="../../../img/project-images/userlogo.png" />
+                        <img ng-if="!model.user.url" class="img-circle" ng-src="../../../img/images/userlogo.png" />
                     <!-- badge -->
                     <div class="rank-label-container">
                         <span class="label label-default rank-label">{{model.user.username}}</span>
@@ -116,8 +90,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function() {
-        $("#dateofbirth").datepicker();
-    });
-</script>

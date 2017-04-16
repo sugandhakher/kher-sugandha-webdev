@@ -10,7 +10,7 @@
     <div class="col-md-9">
         <div class="card hovercard col-md-9">
             <div class="card-background">
-                <img class="card-bkimg" alt="" src="../../../img/project-images/mike.jpg">
+                <img class="card-bkimg" alt="" src="../../../img/images/mike.jpg">
             </div>
             <div class="useravatar">
                 <img ng-if="model.visitedUser.url" alt="" ng-src="{{model.visitedUser.url}}">
@@ -95,10 +95,6 @@
                                 <td>{{model.visitedUser.lastName}}</td>
                             </tr>
                             <tr>
-                                <td>Date of Birth</td>
-                                <td>{{model.visitedUser.date}}</td>
-                            </tr>
-                            <tr>
                                 <td>Email Id</td>
                                 <td>{{model.visitedUser.email}}</td>
                             </tr>
@@ -118,10 +114,6 @@
                             </tbody>
                         </table>
 
-                        Connect with me on <a target="_blank" ng-src="{{model.visitedUser.facebooklink}}">
-                                <span class="fa fa-facebook"></span>Facebook</a> |
-                                <a target="_blank" ng-src="model.visitedUser.linkedin">
-                                    <span class="fa fa-linkedin"></span>LinkedIn</a>
                     </div>
                         </div>
                     </div>
@@ -158,7 +150,7 @@
                             <div class="profile-header-img member-profile">
                                 <img ng-if="user.url" class="img-circle" ng-src="{{user.url}}"/>
                                 <img ng-if="!user.url" class="img-circle"
-                                     ng-src="../../../img/project-images/userlogo.png"/>
+                                     ng-src="../../../img/images/userlogo.png"/>
                                 <a class="" href="#/user/project/profile/{{user.username}}"><h3 style="text-transform: none">{{user.username}}</h3></a>
                             </div>
                         </div>

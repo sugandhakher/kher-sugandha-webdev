@@ -62,7 +62,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="#/">
-                <img style="padding-top: 10px" src="../img/project-images/bookevent.png">
+                <img style="padding-top: 10px" src="../img/images/bookevent.png">
             </a>
         </div>
 
@@ -98,13 +98,18 @@
                     <img ng-if="currentUser.url" class="navigation img-circle img-responsive"
                          ng-src="{{currentUser.url}}"/>
                     <img ng-if="!currentUser.url" class="navigation img-circle img-responsive"
-                         ng-src="../../../img/project-images/userlogo.png"/>
+                         ng-src="../../../img/images/userlogo.png"/>
                 </li>
             </ul>
         </div>
 
     </div>
 </nav>
+<script>
+    $('.carousel').carousel({
+        interval: 5000
+    })
+</script>
 <span ng-view autoscroll="true">
 </span>
 <footer id="footer">
@@ -117,10 +122,6 @@
 <script src="../js/project-js/bootstrap.min.js"></script>
 
 
-<script>
-    $('.carousel').carousel({
-        interval: 5000
-    })
-</script>
+
 </body>
 </html>

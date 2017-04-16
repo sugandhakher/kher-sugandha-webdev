@@ -22,7 +22,7 @@
             if(vm.user.url){
                 return vm.user.url;
             }else{
-                return "../../../img/project-images/userlogo.png";
+                return "../../../img/images/userlogo.png";
             }
         }
 

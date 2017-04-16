@@ -13,22 +13,6 @@
                     loggedIn: checkLoggedIn
                 }
             })
-            .when("/event/:eventName/location/:location", {
-                templateUrl: "views/event/event-search-list.view.client.html",
-                controller: "EventSearchListController",
-                controllerAs: "model",
-                resolve: {
-                    loggedIn: checkLoggedIn
-                }
-            })
-            .when("/event/:eventId", {
-                templateUrl: "views/event/event-detail.view.client.html",
-                controller: "EventDetailController",
-                controllerAs: "model",
-                resolve: {
-                    loggedIn: checkLoggedIn
-                }
-            })
             .when("/user/profile", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
@@ -45,6 +29,23 @@
                     loggedIn: checkLoggedIn
                 }
             })
+            .when("/event/:eventName/location/:location", {
+                templateUrl: "views/event/event-search-list.view.client.html",
+                controller: "EventSearchListController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+            .when("/event/:eventId", {
+                templateUrl: "views/event/event-detail.view.client.html",
+                controller: "EventDetailController",
+                controllerAs: "model",
+                resolve: {
+                    loggedIn: checkLoggedIn
+                }
+            })
+
             .when("/admin", {
                 templateUrl: "views/admin/admin.view.client.html",
                 controller: "AdminController",
