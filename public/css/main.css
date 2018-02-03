@@ -477,6 +477,15 @@ h2 {
   background-image: url("../img/projects.jpg");
 }
 
+#mainNav {
+  position: relative;
+  width: 100%;
+  display: flex;
+  background-image: url("../img/nav.jpg");
+}
+
+mainNav
+
 
 .guitar2 {
   top: 0;
