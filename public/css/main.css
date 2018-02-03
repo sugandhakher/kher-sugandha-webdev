@@ -467,8 +467,16 @@ h2 {
   position: relative;
   width: 100%;
   display: flex;
-  background-image: url("../img/images/classyguitar.jpg");
+  background-image: url("../img/timeline.jpg");
 }
+
+#portfolio {
+  position: relative;
+  width: 100%;
+  display: flex;
+  background-image: url("../img/projects.jpg");
+}
+
 
 .guitar2 {
   top: 0;
